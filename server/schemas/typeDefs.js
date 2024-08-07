@@ -1,10 +1,10 @@
 // Define the GraphQL type definitions
 const typeDefs = `
 
-  # Define the User type with fields _id, name, email, and password
+  # Define the User type with fields _id, username, email, and password
   type User {
     _id: ID
-    name: String
+    username: String
     email: String
     password: String
   }
@@ -17,7 +17,7 @@ const typeDefs = `
 
   # Define the root Query type with fields to retrieve users and a single user by ID
   type Query {
-  
+
     # Retrieves an array of User objects
     users: [User]!
 

@@ -19,9 +19,9 @@ const resolvers = {
 
   Mutation: {
     // Resolver for adding a new user
-    addUser: async (parent, { name, email, password }) => {
+    addUser: async (parent, { username, email, password }) => {
       // Create a new user in the database
-      const user = await User.create({ name, email, password });
+      const user = await User.create({ username, email, password });
       // Generate a JWT token for the new user
       const token = signToken(user);
 
@@ -39,7 +39,7 @@ const resolvers = {
       }
 
       // Check if the provided password is correct
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.validatePassword(password);
 
       // If the password is incorrect, throw an authentication error
       if (!correctPw) {
@@ -48,6 +48,7 @@ const resolvers = {
 
       // Generate a JWT token for the logged-in user
       const token = signToken(user);
+        
       return { token, user };
     },
 
