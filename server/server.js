@@ -4,7 +4,7 @@ const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
 
-require("dotenv").config();
+//require("dotenv").config();
 
 
 const { typeDefs, resolvers } = require("./schemas");

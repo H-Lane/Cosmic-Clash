@@ -1,4 +1,3 @@
-
 // Define the GraphQL type definitions
 const typeDefs = `
 
@@ -10,6 +9,13 @@ const typeDefs = `
     password: String
   }
 
+  # Define the Game type with fields for firstUserId and secondUserId
+  type Game {
+    _id: ID
+    firstUserId: ID
+    secondUserId: ID
+  }
+    
   # Define the Auth type to handle returning data from a user creation or login
   type Auth {
     token: ID!
@@ -22,8 +28,12 @@ const typeDefs = `
     # Retrieves an array of User objects
     users: [User]!
 
+    games: [Game]!
+
     # Retrieves a single User object by ID
     user(userId: ID!): User
+
+    game(gameId: ID!): Game
   }
 
     

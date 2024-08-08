@@ -5,8 +5,10 @@ const jwt = require('jsonwebtoken');
 
 
 // Retrieve the secret and expiration values from environment variables
-const secret = process.env.JWT_SECRET;
-const expiration = process.env.JWT_EXPIRATION;
+const secret = "Thisisasupersecretthing";
+const expiration = '2h'
+// const secret = process.env.JWT_SECRET;
+// const expiration = process.env.JWT_EXPIRATION;
 
 module.exports = {
   // Define a custom GraphQL error for authentication failures
