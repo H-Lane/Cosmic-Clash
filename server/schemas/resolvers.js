@@ -1,6 +1,5 @@
-
 // Import the User model and authentication utilities
-const { User } = require("../models");
+const { User, Game } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 // Define the resolvers for the GraphQL queries and mutations
@@ -23,7 +22,7 @@ const resolvers = {
 
     //Resolver for fetching a single game by ID
     game: async (parent, { gameId }) => {
-      return Game.findOne({ _id: gameId});
+      return Game.findOne({ _id: gameId });
     },
   },
 
@@ -69,17 +68,17 @@ const resolvers = {
 
     // //Resolver for creating a new grid
     // createGrid: async (parent, { userId }, context) => {
-          
-    // // finds user, inputs user and coordinates into grid model, 
+
+    // // finds user, inputs user and coordinates into grid model,
     // if (context.user) {
-        
+
     // }
     // },
 
     // //Resolver for creating a new game
     //   createGame: async (parent, { userId }) => {
     // //
-    
+
     // const game = Game.findOneAndUpdate({ player2: null})
     // },
   },
