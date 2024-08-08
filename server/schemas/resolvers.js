@@ -2,7 +2,6 @@
 const { User } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
-
 // Define the resolvers for the GraphQL queries and mutations
 const resolvers = {
   Query: {
@@ -14,6 +13,16 @@ const resolvers = {
     // Resolver for fetching a single user by ID
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
+    },
+
+    //Resolver for fetching all games
+    games: async () => {
+      return Game.find();
+    },
+
+    //Resolver for fetching a single game by ID
+    game: async (parent, { gameId }) => {
+      return Game.findOne({ _id: gameId});
     },
   },
 
@@ -48,7 +57,7 @@ const resolvers = {
 
       // Generate a JWT token for the logged-in user
       const token = signToken(user);
-        
+
       return { token, user };
     },
 
@@ -56,6 +65,22 @@ const resolvers = {
     removeUser: async (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId });
     },
+
+    // //Resolver for creating a new grid
+    // createGrid: async (parent, { userId }, context) => {
+          
+    // // finds user, inputs user and coordinates into grid model, 
+    // if (context.user) {
+        
+    // }
+    // },
+
+    // //Resolver for creating a new game
+    //   createGame: async (parent, { userId }) => {
+    // //
+    
+    // const game = Game.findOneAndUpdate({ player2: null})
+    // },
   },
 };
 
