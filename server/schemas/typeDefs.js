@@ -1,3 +1,4 @@
+
 // Define the GraphQL type definitions
 const typeDefs = `
 
@@ -41,4 +42,5 @@ const typeDefs = `
 `;
 
 // Export the type definitions
+
 module.exports = typeDefs;

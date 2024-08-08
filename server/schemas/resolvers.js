@@ -1,3 +1,4 @@
+
 // Import the User model and authentication utilities
 const { User } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
@@ -85,4 +86,5 @@ const resolvers = {
 };
 
 // Export the resolvers as a module
+
 module.exports = resolvers;
