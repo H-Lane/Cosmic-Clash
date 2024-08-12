@@ -7,13 +7,13 @@ import Login from './src/pages/Login.jsx';
 import Signup from './src/pages/SignUp.jsx';
 import Home from './src/pages/Home.jsx'
 import Error from './src/pages/Error.jsx'
-import GridCreation from './src/pages/GridCreation.jsx'
+import CreateGrid from './src/pages/CreateGrid.jsx'
 
 const router = createBrowserRouter([
     {
         path: '/', 
-        element: <App />, 
-        error: <Error />, 
+        element: <App />,
+        errorElement: <Error />,  
         children: [
             {
                 index: true, 
@@ -25,9 +25,9 @@ const router = createBrowserRouter([
                 path: '/signup', 
                 element: <Signup />, 
             }, {
-                path: 'creategrid', 
-                element: <GridCreation />,
-            },
+                path: '/creategrid',
+                element: <CreateGrid />,
+            }
         ]
     }
 ])

@@ -29,3 +29,9 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const CREATE_GRID = gql`
+  mutation createGrid($shipName: String!, $position: [Number!]) {
+    createGrid(shipName: $shipName, position: $position)
+  }
+`;
