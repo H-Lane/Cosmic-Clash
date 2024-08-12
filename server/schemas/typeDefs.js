@@ -41,7 +41,7 @@ const typeDefs = `
   type Mutation {
 
     # Creates a new user and returns an Auth object containing the token and user data
-    addUser(name: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
 
     # Logs in a user and returns an Auth object containing the token and user data
     login(email: String!, password: String!): Auth
