@@ -31,6 +31,7 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_GRID = gql`
+
   mutation createGrid(
       $shipName: String!
       $position: [Number!]
@@ -40,3 +41,4 @@ export const CREATE_GRID = gql`
       position: $position
       )
     }`
+

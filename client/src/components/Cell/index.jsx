@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 export default function Cell(props) {
     const { style, onClick, status } = props;
 
+    //create a function that adds a data id to each cell starting at 1-100 top left to bottom right
+
     // Render a cell with specified style, onClick function, and status
     return (
         <div style={{ width: '30px', height: '30px', display: 'inline-block', margin: '1px' }}>
             <button
                 className={`btn btn-block ${style || ''}`} // Add style class if provided
-                style={{ width: '100%', height: '100%', padding: 0, border: '1px solid #ccc' }}
+                style={{ width: '30px', height: '30px', padding: 0, border: '1px solid transparent' }}
                 onClick={onClick}
             >
                 {status}
@@ -23,5 +25,5 @@ export default function Cell(props) {
 Cell.propTypes = {
     style: PropTypes.string, // Style of the cell
     onClick: PropTypes.func.isRequired, // Click event handler for the cell
-    status: PropTypes.string.isRequired, // Status to display in the cell
+    status: PropTypes.string, // Status to display in the cell
 };

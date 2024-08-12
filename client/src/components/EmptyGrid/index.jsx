@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cell from '../Cell/index';
-import './style.css'
+
 
 // Functional component for rendering the player's ship board
 const EmptyGrid = ({ playermap, onBoardClick }) => {
