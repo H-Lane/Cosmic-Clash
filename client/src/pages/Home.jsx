@@ -20,8 +20,9 @@ const Home = () => {
 
     return (
         <div className="container">
-            <EmptyGrid playermap={playermap} onBoardClick={handleBoardClick} />
-            {/* <Link to="./creategrid" >Create A Grid</Link> */}
+
+            <Link to="./creategrid" >Create A Grid</Link>
+
         </div>
     );
 };
