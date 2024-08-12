@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 export default function Cell(props) {
     const { style, onClick, status } = props;
 
+    //create a function that adds a data id to each cell starting at 1-100 top left to bottom right
+
     // Render a cell with specified style, onClick function, and status
     return (
         <div style={{ width: '30px', height: '30px', display: 'inline-block', margin: '1px' }}>
