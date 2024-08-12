@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import EmptyGrid from '../components/EmptyGrid';
 
+
 const Home = () => {
     // Initialize playermap state
     const [playermap, setPlayermap] = useState(Array(100).fill('O'));
@@ -20,7 +21,7 @@ const Home = () => {
     return (
         <div className="container">
             {/* <EmptyGrid playermap={playermap} onBoardClick={handleBoardClick} /> */}
-            <Link to="/CreateGrid" >Create A Grid</Link>
+            <Link to="./creategrid" >Create A Grid</Link>
         </div>
     );
 };
