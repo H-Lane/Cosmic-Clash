@@ -9,7 +9,7 @@ const shipSchema = new Schema({
       type: String,
       required: true,
   },
-  coordinates: [Number],
+  position: [Number],
 });
 
 
