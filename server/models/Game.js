@@ -1,5 +1,29 @@
 const { Schema, model } = require("mongoose");
 
+//Create a schema for the ships
+const shipSchema = new Schema({
+    shipName: {
+        type: String,
+        required: true,
+    },
+    position: [Number],
+  });
+  
+  
+  //Create the schema that accepts the Users Home Grid with their ship placements
+  const gridSchema = new Schema({
+    ships: [shipSchema],
+    userId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+    gameId: {
+        type: Schema.Types.ObjectId,
+        required: false,
+        ref: 'Game'
+    },
+  });
 
 const playerSchema = new Schema({
     userId: {
