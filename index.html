@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Clash</title>
+    <link rel="stylesheet" href="./client/App.css">
+</head>
+<body>
+
+<h2>Cosmic Clash</h2>
+
+<!-- Trigger/Open The Modals -->
+<button id="signInBtn">Sign In</button>
+<button id="signUpBtn">Sign Up</button>
+
+<!-- The Sign In Modal -->
+<div id="signInModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="signInForm">
+        <div class="form-group">
+            <label for="signInUsername">Username</label>
+            <input type="text" id="signInUsername" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="signInPassword">Password</label>
+            <input type="password" id="signInPassword" name="password" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Sign In</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+<!-- The Sign Up Modal -->
+<div id="signUpModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="signUpForm">
+        <div class="form-group">
+            <label for="signUpEmail">Email</label>
+            <input type="email" id="signUpEmail" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="signUpUsername">Username</label>
+            <input type="text" id="signUpUsername" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="signUpPassword">Password</label>
+            <input type="password" id="signUpPassword" name="password" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Sign Up</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+<script src="./client/App.jsx"></script>
+
+</body>
+</html>
