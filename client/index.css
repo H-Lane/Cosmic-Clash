@@ -1,0 +1,224 @@
+:root {
+  --primary: #232F3E;
+  --secondary: #1a3e4c;
+  --tertiary: #5a5b5c;
+  --light: #fafafa;
+  --dark: #272f32;
+  --error: rgb(75, 85, 102);
+  --spacing-one: calc(1rem * 0.5);
+  --spacing-two: calc(1rem);
+  --border-radius: 0.5rem;
+  --font-size-base: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Karla', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: var(--font-size-base);
+  color: var(--dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 1500;
+  margin: 0;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 2.5rem; /* Slightly larger */
+}
+
+h2 {
+  font-size: 2.25rem; /* Slightly larger */
+}
+
+h3 {
+  font-size: 2rem; /* Slightly larger */
+}
+
+h4 {
+  font-size: 1.75rem; /* Slightly larger */
+}
+
+h5 {
+  font-size: 1.5rem; /* Slightly larger */
+}
+
+h6 {
+  font-size: 1.25rem; /* Slightly larger */
+}
+
+p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+a {
+  color: var(--tertiary);
+  text-decoration: none;
+  font-weight: 600; /* Slightly bolder */
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  background: var(--primary);
+  padding: var(--spacing-two);
+}
+
+header a {
+  color: var(--light);
+}
+
+button {
+  font-size: 1rem;
+  text-decoration: none;
+  padding: var(--spacing-one) var(--spacing-two);
+  border-radius: var(--border-radius);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  background-color: var(--secondary);
+  color: var(--light);
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+img {
+  max-width: 100%;
+}
+
+span[role="img"] {
+  cursor: default;
+}
+
+form {
+  width: 100%;
+  max-width: 500px; /* Added max-width for better control */
+  margin: 0 auto; /* Centering the form */
+}
+
+input {
+  font-size: 1rem;
+  padding: var(--spacing-one);
+  border: 1px solid var(--dark);
+  outline: none;
+  border-radius: var(--border-radius);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-two); /* Adding gap for spacing between items */
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.mx-1 {
+  margin: 0 var(--spacing-one);
+}
+
+.mx-2 {
+  margin: 0 var(--spacing-two);
+}
+
+.my-1 {
+  margin: var(--spacing-one) 0;
+}
+
+.my-2 {
+  margin: var(--spacing-two) 0;
+}
+
+.px-1 {
+  padding: 0 var(--spacing-one);
+}
+
+.px-2 {
+  padding: 0 var(--spacing-two);
+}
+
+.py-1 {
+  padding: var(--spacing-one) 0;
+}
+
+.py-2 {
+  padding: var(--spacing-two) 0;
+}
+
+.card {
+  width: 100%;
+  max-width: 300px; /* Added max-width for better control */
+  margin: 0 auto; /* Centering the card */
+  text-align: center;
+  background: var(--light);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.error-text {
+  color: var(--error);
+}
+
+.btn-O {
+    background-color: rgb(209, 211, 212); /* Color for 'O' */
+}
+
+.btn-X {
+    background-color: rgb(15, 15, 15); /* Color for 'X' */
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    width: 48%; /* Adjusting width for larger screens */
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card {
+    width: 23%; /* Adjusting width for larger screens */
+  }
+}
