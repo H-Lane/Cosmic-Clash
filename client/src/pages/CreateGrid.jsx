@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import EmptyGrid from "../components/EmptyGrid";
 import { useMutation } from "@apollo/client";
-import { createGrid } from "../utils/mutations";
+import { CREATE_GRID } from "../utils/mutations";
 
+//This is our parent function for the page
 function generateGrid(props) {
+    //Here we set up a useState expecting an array of five objects
   const [ships, setShips] = useState([
     { shipName: "ship1", position: [] },
     { shipName: "ship2", position: [] },
@@ -11,15 +13,19 @@ function generateGrid(props) {
     { shipName: "ship4", position: [] },
     { shipName: "ship5", position: [] }
   ]);
-  const [createGrid] = useMutation(CREATE_GRID);
+  //We bring in our createGrid mutation
+  const [createGrid, { data }] = useMutation(CREATE_GRID);
 
+  //This is the function that goes off when the User clicks the save ship layout button
   const handleShipSave = async (event) => {
     event.preventDefault();
+    // map though our ships array in useState and pull the ship with the position
     const positions = ships.map(ship => ({
         shipName: ship.shipName,
         position: ship.position
     }));
 
+    //Send the useState array off to the createGrid mutation
     const mutationResponse = await createGrid({
       variables: {
         ships: positions
@@ -27,6 +33,7 @@ function generateGrid(props) {
     });
   };
 
+  //This is the listener that is updating the useState whenever a ship is placed
   const handlePlacement = (e) => {
     const { position, value } = e.target;
     const shipName = e.target.dataset.className; //Make sure to create an empty dataclass on each square that can be updated to contain the name of the ship in that space
@@ -43,7 +50,7 @@ function generateGrid(props) {
 
   return (
     <div className="grid-container">
-      <EmptyGrid playermap={playermap} onBoardClick={handlePlacement}></EmptyGrid>
+      <EmptyGrid onBoardClick={handlePlacement}></EmptyGrid>
       <button onClick={handleShipSave}>Save Ship Layout</button>
     </div>
   );
