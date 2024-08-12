@@ -66,12 +66,12 @@ const resolvers = {
       return User.findOneAndDelete({ _id: userId });
     },
 
-    // //Resolver for creating a new grid
+    //Resolver for creating a new grid
     // createGrid: async (parent, { userId }, context) => {
 
-    // // finds user, inputs user and coordinates into grid model,
+    // finds user, inputs user and coordinates into grid model,
     // if (context.user) {
-
+    //   const user = await User.findById({context.userId})
     // }
     // },
 
