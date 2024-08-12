@@ -5,7 +5,8 @@ import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client';
 import Home from './src/pages/Home';
 import Signup from './src/pages/SignUp';
 import Login from './src/pages/Login';
-import Error from './src/pages/Error'
+import Error from './src/pages/Error';
+import GridCreation from './src/pages/GridCreation'
 // import Game from './pages/Game'; 
 
 // Set up Apollo Client
@@ -22,6 +23,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/creategrid" element={<GridCreation />} />
+        
         </Routes>
     </ApolloProvider>
   );

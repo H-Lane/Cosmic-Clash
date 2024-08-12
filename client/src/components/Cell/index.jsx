@@ -10,7 +10,7 @@ export default function Cell(props) {
         <div style={{ width: '30px', height: '30px', display: 'inline-block', margin: '1px' }}>
             <button
                 className={`btn btn-block ${style || ''}`} // Add style class if provided
-                style={{ width: '100%', height: '100%', padding: 0, border: '1px solid #ccc' }}
+                style={{ width: '30px', height: '30px', padding: 0, border: '1px solid transparent' }}
                 onClick={onClick}
             >
                 {status}
@@ -23,5 +23,5 @@ export default function Cell(props) {
 Cell.propTypes = {
     style: PropTypes.string, // Style of the cell
     onClick: PropTypes.func.isRequired, // Click event handler for the cell
-    status: PropTypes.string.isRequired, // Status to display in the cell
+    status: PropTypes.string, // Status to display in the cell
 };
