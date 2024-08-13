@@ -3,21 +3,31 @@ import Cell from '../Cell/index';
 
 
 // Functional component for rendering the player's ship board
-const EmptyGrid = ({ playermap, onBoardClick }) => {
+const EmptyGrid = ({ ships, onBoardClick }) => {
     // State to store the ship board grid
     const [shipBoard, setShipBoard] = useState([]);
 
+    console.log(ships)
+
+    const positionSelected = (pos) => {
+        for (let ship of ships) {
+            if (ship.position.includes(pos)) return true;  
+        }
+        return false
+    }
     // Function to render a single cell in the grid
    const renderCell = (i) => {
-    const status = playermap[i][0]; // Assuming this returns 'O' or 'X'
+    const status = ships[i]; // Assuming this returns 'O' or 'X'
     const style = status === 'O' ? 'btn-O' : status === 'X' ? 'btn-X' : '';
 
-    return (
-        <Cell
-            style={style}
-            status={status}
+       return (
+           <Cell
+               style={positionSelected(i + 1) ? 'btn-X' : 'btn-O'}
+               status={positionSelected(i + 1) ? 'X' : 'O'}
             onClick={() => onBoardClick(i)}
             key={i}
+            dataPosition={i + 1}
+            selected={positionSelected(i+1)}
         />
     );
 };
@@ -46,10 +56,10 @@ const EmptyGrid = ({ playermap, onBoardClick }) => {
 
     // Render the ship board when the component mounts
     useEffect(() => {
-    if (playermap && playermap.length > 0) {
+    if (ships && ships.length > 0) {
         renderShipBoard();
     }
-}, [playermap]);
+}, [ships]);
 
     // Return the ship board grid
     return <div className='ship-board'>{shipBoard}</div>;
