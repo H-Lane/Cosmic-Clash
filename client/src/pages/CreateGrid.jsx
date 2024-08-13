@@ -7,9 +7,9 @@ import { CREATE_GRID } from "../utils/mutations";
 function generateGrid(props) {
     //Here we set up a useState expecting an array of five objects
   const [ships, setShips] = useState([
-    { shipName: "ship1", position: [] },
-    { shipName: "ship2", position: [] },
-    { shipName: "ship3", position: [] },
+    { shipName: "ship1", position: [1,2,3] },
+    { shipName: "ship2", position: [34,35,36] },
+    { shipName: "ship3", position: [44,88] },
     { shipName: "ship4", position: [] },
     { shipName: "ship5", position: [] }
   ]);
@@ -50,7 +50,7 @@ function generateGrid(props) {
 
   return (
     <div className="grid-container">
-      <EmptyGrid onBoardClick={handlePlacement}></EmptyGrid>
+          <EmptyGrid ships={ships} onBoardClick={handlePlacement}></EmptyGrid>
       <button onClick={handleShipSave}>Save Ship Layout</button>
     </div>
   );

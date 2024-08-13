@@ -14,6 +14,8 @@ export default function Cell(props) {
                 className={`btn btn-block ${style || ''}`} // Add style class if provided
                 style={{ width: '30px', height: '30px', padding: 0, border: '1px solid transparent' }}
                 onClick={onClick}
+                data-position={props.dataPosition}
+                
             >
                 {status}
             </button>
