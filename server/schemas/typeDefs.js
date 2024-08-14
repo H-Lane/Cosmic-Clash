@@ -1,3 +1,6 @@
+// 8/11 TO DO: Check to see if the Grid and Ship type should be required. 
+// 8/11 TO DO: Whats the logic behind a turn key and winner key in Game type being an ID?
+
 // Define the GraphQL type definitions
 const typeDefs = `
 
@@ -7,13 +10,40 @@ const typeDefs = `
     username: String
     email: String
     password: String
+    grids: [Grid]
+  }
+  
+  # Define the Grid type with fields ships, userId, and gameId
+  type Grid {
+  ships: [Ship]
+  userId: ID
+  gameId: ID
+  }
+
+  # Define the Ship type with fields shipName and position
+  type Ship {
+  shipName: String
+  position: [Int]
   }
 
   # Define the Game type with fields for firstUserId and secondUserId
   type Game {
     _id: ID
-    firstUserId: ID
-    secondUserId: ID
+    playerOne: [Player]
+    playerTwo: [Player]
+    turn: ID
+    firstAttacks: [Int]
+    secondAttacks: [Int]
+    winner: ID
+    playerOneGrid: [Grid]
+    playerTwoGrid: [Grid]
+  }
+
+  # Define the Player type with fields for userId, hits, and misses
+  type Player {
+  userId: ID
+  hits: [Int]
+  misses: [Int]
   }
     
   # Define the Auth type to handle returning data from a user creation or login
@@ -24,20 +54,19 @@ const typeDefs = `
 
   # Define the root Query type with fields to retrieve users and a single user by ID
   type Query {
-
-    # Retrieves an array of User objects
-    users: [User]!
-
+    
     games: [Game]!
-
-    # Retrieves a single User object by ID
-    user(userId: ID!): User
-
     game(gameId: ID!): Game
+    me: User
   }
 
     
-  # Define the root Mutation type with fields to add a user, log in, and remove a user
+  input ShipInput {
+  shipName: String
+  position: [Int]
+  }
+
+  # Define the root Mutation type with fields to add a user, log in, 
   type Mutation {
 
     # Creates a new user and returns an Auth object containing the token and user data
@@ -46,8 +75,8 @@ const typeDefs = `
     # Logs in a user and returns an Auth object containing the token and user data
     login(email: String!, password: String!): Auth
 
-    # Removes a user by ID and returns the removed User object
-    removeUser(userId: ID!): User
+    createGrid(ships: [ShipInput]!, userId: ID!, gameId: ID): Grid
+    
   }
 `;
 

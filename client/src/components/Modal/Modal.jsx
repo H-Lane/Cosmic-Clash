@@ -1,10 +1,10 @@
 import React from 'react';
-import './Modal.css'; // Assuming you have styles for the modal
+import './Modal.css'; // Ensure path to CSS is correct
 
 const Modal = ({ children }) => {
   return (
     <div className="modal-overlay">
-      <div className="modal">
+      <div className="modal-content">
         {children}
       </div>
     </div>

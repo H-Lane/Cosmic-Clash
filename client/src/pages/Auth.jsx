@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import Login from './Login';
-import Signup from './Signup';
+import Login from './Login'; // Import Login from the same directory
+import Signup from './Signup'; // Import Signup from the same directory
+import Modal from '../components/Modal/Modal'; // Import Modal component
 
 const Auth = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <Modal>
+      <div className="modal-content">
         <button className="close-btn" onClick={onClose}>X</button>
         {isLogin ? <Login /> : <Signup />}
         <p>
@@ -17,7 +18,7 @@ const Auth = ({ onClose }) => {
           </button>
         </p>
       </div>
-    </div>
+    </Modal>
   );
 };
 

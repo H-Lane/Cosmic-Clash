@@ -1,40 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import EmptyGrid from '../components/EmptyGrid';
-import Login from './Login'; // Assuming Login component handles both login and signup modes
+import Auth from './Auth'; // Import the Auth component
 
 const Home = () => {
-    const [playermap, setPlayermap] = useState(Array(100).fill('O'));
-    const [isLoginMode, setIsLoginMode] = useState(true); // Track login/signup mode
+    const [ships, setPlayermap] = useState(Array(100).fill('O'));
+    const [isAuthOpen, setIsAuthOpen] = useState(false); // State to control modal visibility
 
     const handleBoardClick = (index) => {
         console.log(`Cell ${index} clicked`);
-
-        const updatedPlayermap = [...playermap];
+        const updatedPlayermap = [...ships];
         updatedPlayermap[index] = 'X';
         setPlayermap(updatedPlayermap);
     };
 
-    const toggleLoginMode = () => {
-        setIsLoginMode(!isLoginMode); // Toggle between login and signup modes
+    const toggleAuthModal = () => {
+        setIsAuthOpen(!isAuthOpen); // Toggle modal visibility
     };
 
     return (
         <div className="container">
-            <header>
-                <button onClick={toggleLoginMode}>
-                    {isLoginMode ? 'Sign Up' : 'Log In'}
-                </button>
-            </header>
-
-            {isLoginMode ? (
-                <Login mode="login" /> // Pass 'login' mode to the Login component
-            ) : (
-                <Login mode="signup" /> // Pass 'signup' mode to the Login component
-            )}
-
-            {/* <EmptyGrid playermap={playermap} onBoardClick={handleBoardClick} /> */}
-            <Link to="/CreateGrid">Create A Grid</Link>
+            <Link to="./creategrid">Create A Grid</Link>
+            <button onClick={toggleAuthModal}>Login / Signup</button>
+            {isAuthOpen && <Auth onClose={toggleAuthModal} />} {/* Render modal conditionally */}
         </div>
     );
 };

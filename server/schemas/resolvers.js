@@ -5,14 +5,11 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 // Define the resolvers for the GraphQL queries and mutations
 const resolvers = {
   Query: {
-    // Resolver for fetching all users
-    users: async () => {
-      return User.find();
-    },
-
-    // Resolver for fetching a single user by ID
-    user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId });
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate("grids");
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     //Resolver for fetching all games
@@ -61,23 +58,32 @@ const resolvers = {
       return { token, user };
     },
 
-    // Resolver for removing a user by ID
-    removeUser: async (parent, { userId }) => {
-      return User.findOneAndDelete({ _id: userId });
+    createGrid: async (parent, { ships, userId, gameId }, context) => {
+      if (context.user) {
+        const newGrid = await Grid.create({ ships, userId, gameId });
+
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { grids: newGrid._id } }
+        );
+
+        return newGrid;
+      }
+      throw new AuthenticationError("Not logged in");
     },
 
-    //Resolver for creating a new grid
-    // createGrid: async (parent, { userId }, context) => {
+    // // Resolver for creating a new grid
+    // createGrid: async (parent, {  }, context) => {
 
-    // finds user, inputs user and coordinates into grid model,
+    // // finds user, inputs user and coordinates into grid model
     // if (context.user) {
     //   const user = await User.findById({context.userId})
     // }
     // },
 
-    // //Resolver for creating a new game
-    //   createGame: async (parent, { userId }) => {
-    // //
+    // // //Resolver for creating a new game
+    // //   createGame: async (parent, { userId }) => {
+    // // //
 
     // const game = Game.findOneAndUpdate({ player2: null})
     // },
