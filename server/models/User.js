@@ -3,31 +3,6 @@ const { isEmail } = require("validator");
 const bcrypt = require("bcrypt");
 SALT_WORK_FACTOR = 10;
 
-//Create a schema for the ships
-const shipSchema = new Schema({
-  shipName: {
-      type: String,
-      required: true,
-  },
-  position: [Number],
-});
-
-
-//Create the schema that accepts the Users Home Grid with their ship placements
-const gridSchema = new Schema({
-  ships: [shipSchema],
-  userId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'User'
-  },
-  gameId: {
-      type: Schema.Types.ObjectId,
-      required: false,
-      ref: 'Game'
-  },
-});
-
 
 // Create our User Schema taking in a username, email, and password
 const userSchema = new Schema({
@@ -46,7 +21,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  grids: [gridSchema],
 });
 
 userSchema.pre('save', async function(next) {
