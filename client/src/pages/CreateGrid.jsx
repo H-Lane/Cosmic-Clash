@@ -55,7 +55,7 @@ function CreateGrid(props) {
     setSpacesLeft(spacesLeft-1)
   };
 
-  //Sets the selected ship from the ship component to the selectedShip variable
+  //Sets the selected ship from the ship component to the use states associated with them. Also displays the size of the ship to the page so that the User knows how many square they have left.
   //FUTURE: Change styling to display the selected ship and stop user from selecting another ship until the ship is fully placed
   const shipSetter = (e) => {
     setShipName(e.target.dataset.name);
