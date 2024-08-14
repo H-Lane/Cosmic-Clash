@@ -7,6 +7,7 @@ const gameSchema = new Schema({
     required: true
   },
   playerTwo: Schema.Types.ObjectId,
+  
   turn: {
     type: Schema.Types.ObjectId,
     required: true,

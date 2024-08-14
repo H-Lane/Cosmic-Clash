@@ -63,7 +63,7 @@ function CreateGrid(props) {
       return;
     } else {
       //Set a message to display in the modal and call the modal to display
-      setMessage("Select Another Ship To Delpoy!");
+      setMessage("Select Another Ship To Deploy!");
       setShowModal(true);
     }
   };
