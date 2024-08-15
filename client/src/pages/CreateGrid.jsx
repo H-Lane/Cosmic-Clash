@@ -50,6 +50,7 @@ function CreateGrid(props) {
   };
 
   //This is the listener that is updating the useState for the ships whenever a ship is placed
+  //FUTURE BUGFIX: A player can currently reselect a ship before all of its spaces are used up and it will refresh the number of spaces they can add for that ship while keeping those spaces that were previously selected
   const handlePlacement = (e) => {
     //first we check if there are still places left for the ship the user has selected
     if (shipName && spacesLeft > 0) {
