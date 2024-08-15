@@ -21,6 +21,13 @@ export const GET_ME = gql`
   }
 `;
   ;
-
+  export const  GET_USER_GRIDS = gql`
+  query GetUserGrids($userId: ID!) {
+    getUserGrids(userId: $userId) {
+      id
+      cells
+    }
+  }
+`;
 // export const QUERY_GAMES = gql`
 // `
