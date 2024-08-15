@@ -60,6 +60,7 @@ const resolvers = {
 
     createGrid: async (parent, { ships }, context) => {
       if (context.user) {
+        console.log(ships);
         const newGrid = await Grid.create({ ships, userId: context.user._id });
 
         return newGrid;

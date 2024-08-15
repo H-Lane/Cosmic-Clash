@@ -16,7 +16,6 @@ const typeDefs = `
   type Grid {
   ships: [Ship]
   userId: ID
-  gameId: ID
   }
 
   # Define the Ship type with fields shipName and position

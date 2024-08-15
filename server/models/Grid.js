@@ -17,13 +17,6 @@ const gridSchema = new Schema({
     required: true,
     ref: "User",
   },
-  gameId: [
-    {
-      type: Schema.Types.ObjectId,
-      required: false,
-      ref: "Game",
-    },
-  ],
 });
 
 const Grid = model(`Grid`, gridSchema);
