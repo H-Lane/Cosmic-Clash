@@ -29,18 +29,17 @@ function CreateGrid(props) {
   //This is the function that goes off when the User clicks the save ship layout button
   const handleShipSave = async (event) => {
     event.preventDefault();
+
     // map though our ships array in useState and pull the ship with the position
-    const positions = ships.map((ship) => ({
-      shipName: ship.shipName,
-      position: ship.position,
-    }));
+    // const positions = ships.map((ship) => ({
+    //   shipName: ship.shipName,
+    //   position: ship.position,
+    // }));
 
     //Send the useState array off to the createGrid mutation
-    const mutationResponse = await createGrid({
-      variables: {
-        ships: positions,
-      },
-    });
+    const mutationResponse = await createGrid(ships);
+
+    console.log(mutationResponse)
   };
 
   //This is the listener that is updating the useState for the ships whenever a ship is placed

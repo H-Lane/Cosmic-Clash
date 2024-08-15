@@ -66,7 +66,7 @@ const typeDefs = `
     # Logs in a user and returns an Auth object containing the token and user data
     login(email: String!, password: String!): Auth
 
-    createGrid(ships: [ShipInput]!): Grid
+    createGrid(ships: [ShipInput]! ): Grid
     
   }
 `;

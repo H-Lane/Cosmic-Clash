@@ -66,22 +66,6 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
-
-    // // Resolver for creating a new grid
-    // createGrid: async (parent, {  }, context) => {
-
-    // // finds user, inputs user and coordinates into grid model
-    // if (context.user) {
-    //   const user = await User.findById({context.userId})
-    // }
-    // },
-
-    // // //Resolver for creating a new game
-    // //   createGame: async (parent, { userId }) => {
-    // // //
-
-    // const game = Game.findOneAndUpdate({ player2: null})
-    // },
   },
 };
 
