@@ -24,22 +24,24 @@ function CreateGrid(props) {
   ]);
 
   //We bring in our createGrid mutation
-  const [createGrid, { data }] = useMutation(CREATE_GRID);
+  const [createGrid, { data, error } ] = useMutation(CREATE_GRID);
 
   //This is the function that goes off when the User clicks the save ship layout button
   const handleShipSave = async (event) => {
+    console.log(ships)
     event.preventDefault();
 
-    // map though our ships array in useState and pull the ship with the position
-    // const positions = ships.map((ship) => ({
-    //   shipName: ship.shipName,
-    //   position: ship.position,
-    // }));
-
     //Send the useState array off to the createGrid mutation
-    const mutationResponse = await createGrid(ships);
+    try {
+    const mutationResponse = await createGrid({
+      variables: {ships: ships}
+    });
+    } catch (err) {
+      console.error(err);
+      console.log(error)
+    };
 
-    console.log(mutationResponse)
+    console.log('End Click')
   };
 
   //This is the listener that is updating the useState for the ships whenever a ship is placed
