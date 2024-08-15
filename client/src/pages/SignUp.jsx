@@ -23,6 +23,8 @@ function Signup(props) {
       // Extract token and authenticate user
       const token = mutationResponse.data.addUser.token;
       Auth.login(token);
+
+      
     } catch (e) {
       console.error(e);
     }

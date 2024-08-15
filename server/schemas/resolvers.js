@@ -1,5 +1,5 @@
 // Import the User model and authentication utilities
-const { User, Game } = require("../models");
+const { User, Game, Grid } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 // Define the resolvers for the GraphQL queries and mutations
@@ -58,35 +58,14 @@ const resolvers = {
       return { token, user };
     },
 
-    createGrid: async (parent, { ships, userId, gameId }, context) => {
+    createGrid: async (parent, { ships }, context) => {
       if (context.user) {
-        const newGrid = await Grid.create({ ships, userId, gameId });
-
-        await User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { grids: newGrid._id } }
-        );
+        const newGrid = await Grid.create({ ships, userId: context.user._id });
 
         return newGrid;
       }
       throw new AuthenticationError("Not logged in");
     },
-
-    // // Resolver for creating a new grid
-    // createGrid: async (parent, {  }, context) => {
-
-    // // finds user, inputs user and coordinates into grid model
-    // if (context.user) {
-    //   const user = await User.findById({context.userId})
-    // }
-    // },
-
-    // // //Resolver for creating a new game
-    // //   createGame: async (parent, { userId }) => {
-    // // //
-
-    // const game = Game.findOneAndUpdate({ player2: null})
-    // },
   },
 };
 
