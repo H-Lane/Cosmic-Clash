@@ -84,7 +84,6 @@ function CreateGrid(props) {
   //Conditionally render displayed ships
   const renderShips = (newSpacesLeft) => {
     if (shipName && newSpacesLeft === 0) {
-      console.log("renderShips");
       setShowShips(showShips.filter((name) => name !== shipName));
     }
   };
