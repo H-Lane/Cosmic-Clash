@@ -33,9 +33,3 @@ export default function Cell({ style, handlePlacement, status, dataPosition }) {
   );
 }
 
-// // Define prop types for Cell component
-// Cell.propTypes = {
-//     style: PropTypes.string, // Style of the cell
-//     //onClick: PropTypes.func.isRequired, // Click event handler for the cell
-//     status: PropTypes.string, // Status to display in the cell
-// };
