@@ -88,6 +88,19 @@ function CreateGrid(props) {
     }
   };
 
+  //function to clear the selected positions currently on the board and reshow any removed ships from the list of ships
+  const clearBoard = () => {
+    setShips(
+      ships.map((ship) => {
+        if (ship.position.length > 0) {
+          ship.position = [];
+        }
+        return ship;
+      })
+    );
+    setShowShips(["ship1", "ship2", "ship3", "ship4", "ship5"]);
+  };
+
   //Sets the selected ship from the ship component to the use states associated with them. Also displays the size of the ship to the page so that the User knows how many squares they have left.
   //FUTURE: Change styling to display the selected ship and stop user from selecting another ship until the ship is fully placed
   const shipSetter = (e) => {
@@ -108,8 +121,8 @@ function CreateGrid(props) {
       <EmptyGrid ships={ships} handlePlacement={handlePlacement} />
       <button onClick={handleShipSave}>Save Ship Layout</button>
       <DisplayShips shipSetter={shipSetter} showShips={showShips} />
+      <button onClick={clearBoard}>Clear Board</button>
       <h1>SPACES LEFT: {spacesLeft}</h1>
-
       {/* This is a modal to display any information stored in the message useState as a modal to a user. ORRNDREA WE WILL NEED THIS TO BE A STYLED MODAL */}
       {showModal && (
         <div className="modal">
