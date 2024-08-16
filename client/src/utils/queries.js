@@ -31,14 +31,14 @@ export const GET_ME = gql`
 // `;
 
 export const GET_USER_GRIDS = gql`
-  query Query($userId: ID!) {
-    grids(userId: $userId) {
-      ships {
-        shipName
-        position
-      }
+  query Grids {
+  grids {
+    ships {
+      position
+      shipName
     }
   }
+}
 `;
 // export const QUERY_GAMES = gql`
 // `
