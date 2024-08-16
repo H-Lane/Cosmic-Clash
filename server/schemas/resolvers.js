@@ -14,19 +14,10 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-<<<<<<< Updated upstream
 
     grids: async ( parent,args,context ) => {
       console.log(context.user)
       return Grid.find({userId: context.user._id});
-=======
-    grids: async (parent, args, context) => {
-      
-
-        return Grid.find({ userId: context.user }
-        );
-    
->>>>>>> Stashed changes
     },
 
     //Resolver for fetching all games
