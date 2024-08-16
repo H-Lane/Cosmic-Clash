@@ -1,6 +1,8 @@
 // Import the User model and authentication utilities
 const { User, Game, Grid } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+const { Types } = require("mongoose");
+
 
 // Define the resolvers for the GraphQL queries and mutations
 const resolvers = {
@@ -12,10 +14,19 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+<<<<<<< Updated upstream
 
     grids: async ( parent,args,context ) => {
       console.log(context.user)
       return Grid.find({userId: context.user._id});
+=======
+    grids: async (parent, args, context) => {
+      
+
+        return Grid.find({ userId: context.user }
+        );
+    
+>>>>>>> Stashed changes
     },
 
     //Resolver for fetching all games
@@ -74,7 +85,30 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
-  },
+    createGame: async (parent, { gridId }, context) => {
+      if (context.user) {
+        const newGame = (await Game.create({ playerOne: context.user._id, turn: context.user._id, playerOneGrid: new Types.ObjectId(gridId) }));
+        
+        return newGame;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+    joinGame: async (parent, { gridId }, context) => {
+      if (context.user) {
+        const joinGame = await Game.findOneAndUpdate(
+          { playerTwo: null },
+          {
+            playerTwo: context.user._id,
+            playerTwoGrid: new Types.ObjectId(gridId),
+          }
+        );
+      
+        return joinGame;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+
+  }
 };
 
 // Export the resolvers as a module
