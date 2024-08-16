@@ -12,8 +12,9 @@ const typeDefs = `
     password: String
   }
   
-  # Define the Grid type with fields ships, userId, and gameId
+  # Define the Grid type with fields ships, userId
   type Grid {
+  _id: ID
   ships: [Ship]
   userId: ID
   }

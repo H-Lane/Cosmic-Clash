@@ -12,6 +12,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+
     grids: async ( parent,args,context ) => {
       console.log(context.user)
       return Grid.find({userId: context.user._id});
@@ -23,7 +24,7 @@ const resolvers = {
     },
 
     //Resolver for fetching a single game by ID
-    game: async (parent, { gameId }) => {
+    game: async (parent, args, { gameId }) => {
       return Game.findOne({ _id: gameId });
     },
   },
