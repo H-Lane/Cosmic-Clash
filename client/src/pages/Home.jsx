@@ -23,18 +23,30 @@ const Home = () => {
 
     return (
         <div className="container">
-            {/* Render the EmptyGrid component and pass the userId as children */}
-            
-            
+            {/* Render the EmptyGrid component with initial ships, handlePlacement function, and a unique gridId */}
+            {/* The gridId here is "empty", and this should correspond to an initial or default grid */}
+            <EmptyGrid 
+                ships={ships} 
+                handlePlacement={handlePlacement} 
+                gridId="empty" 
+            />
+
             {/* Navigation link to create a new grid */}
             <Link to="./creategrid">Create A Grid</Link>
 
-            {/* Display user's grids */}
-          { data ? data.grids.map((grid)=>(
-             <EmptyGrid ships={grid.ships} handlePlacement={handlePlacement} gridId={grid._id}></EmptyGrid>
-           )) : ""}
+            {/* Display the grids fetched from the server */}
+            {data && data.grids.map((grid) => (
+                /* Render the EmptyGrid component for each grid with data fetched from the server */
+                /* The key prop is necessary for React to efficiently update the list */
+                <EmptyGrid 
+                    key={grid._id} // Unique key for each grid item
+                    ships={grid.ships} // Pass the ships data to the EmptyGrid component
+                    handlePlacement={handlePlacement} // Pass the handlePlacement function to each grid
+                    gridId={grid._id} // Pass the unique gridId to identify each grid
+                />
+            ))}
         </div>
     );
 };
 
-export default Home; // Export the Home component
+export default Home; // Export the Home component for use in other parts of the application
