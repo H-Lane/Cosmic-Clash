@@ -31,7 +31,7 @@ const Home = () => {
 
             {/* Display user's grids */}
           { data ? data.grids.map((grid)=>(
-             <EmptyGrid ships={grid.ships} handlePlacement={handlePlacement}></EmptyGrid>
+             <EmptyGrid ships={grid.ships} handlePlacement={handlePlacement} gridId={grid._id}></EmptyGrid>
            )) : ""}
         </div>
     );
