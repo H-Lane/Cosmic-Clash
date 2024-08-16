@@ -48,7 +48,7 @@ const typeDefs = `
     games: [Game]!
     game(gameId: ID!): Game
     me: User
-    grids(userId: ID!): [Grid]!
+    grids: [Grid]!
   }
 
     
