@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cell from "../Cell/index";
 
 // Functional component for rendering the player's ship board
-const EmptyGrid = ({ ships, handlePlacement}) => {
+const EmptyGrid = ({ ships, handlePlacement, gridId}) => {
   // State to store the ship board grid
 
   const [shipBoard, setShipBoard] = useState([]);
@@ -20,6 +20,7 @@ const EmptyGrid = ({ ships, handlePlacement}) => {
 
     return (
       <Cell
+      gridId={gridId}
         style={positionSelected(i + 1) ? "btn-X" : "btn-O"}
         status={positionSelected(i + 1) ? "X" : "O"}
         handlePlacement={handlePlacement}
