@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cell from "../Cell/index";
 
 // Functional component for rendering the player's ship board
-const EmptyGrid = ({ ships, handlePlacement, userGrid}) => {
+const EmptyGrid = ({ ships, handlePlacement}) => {
   // State to store the ship board grid
 
   const [shipBoard, setShipBoard] = useState([]);
