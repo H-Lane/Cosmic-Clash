@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Functional component for a cell in a grid
-export default function Cell({ style, handlePlacement, status, dataPosition }) {
+export default function Cell({ style, handlePlacement, status, dataPosition, selectSquare }) {
   //create a function that adds a data id to each cell starting at 1-100 top left to bottom right
 
   // Render a cell with specified style, onClick function, and status
@@ -25,8 +25,9 @@ export default function Cell({ style, handlePlacement, status, dataPosition }) {
         }}
         //We make the on click handler only have a function if the button hasn't been clicked with a ship
         onClick={status === "O" ? handlePlacement : undefined}
+        onMouseUp={selectSquare}
         data-position={dataPosition}
-      >
+        >
         {status}
       </button>
     </div>

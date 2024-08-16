@@ -2,30 +2,30 @@ import React, { useState } from "react";
 import Cell from "../Cell/index";
 
 // Functional component for rendering the player's attack grid
-const AttackGrid = ({ ships, handleAttack }) => {
+const AttackGrid = ({ atkPosition, selectSquare }) => {
   // State to store the attack grid
   const [attackBoard, setAttackBoard] = useState([]);
 
-  const positionAttacked = (pos) => {
-    for (let ship of ships) {
-      if (ship.position.includes(pos)) return true;
+  const positionSelected = (pos) => {
+    if (atkPosition == pos) {
+      return true
     }
     return false;
   };
 
   // Function to render a single cell in the attack grid
   const renderCell = (i) => {
-    const status = ships[i]; // Assuming this returns 'O' or 'X'
-    const style = positionAttacked(i + 1) ? "btn-X" : "btn-O";
+    // const status = ships[i]; // Assuming this returns 'O' or 'X'
+    // const style = status === "O" ? "btn-O" : status === "X" ? "btn-X" : "";
 
     return (
       <Cell
-        style={positionAttacked(i + 1) ? "btn-X" : "btn-O"}
-        status={positionAttacked(i + 1) ? "X" : "O"}
-        handleAttack={handleAttack}
+        style={positionSelected(i + 1) ? "btn-X" : "btn-O"}
+        status={positionSelected(i + 1) ? "X" : "O"}
+        selectSquare={selectSquare}
         key={i}
         dataPosition={i + 1}
-        attacked={positionAttacked(i + 1)}
+        attacked={positionSelected(i + 1)}
       />
     );
   };
