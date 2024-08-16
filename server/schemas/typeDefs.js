@@ -37,6 +37,18 @@ const typeDefs = `
     playerOneGrid: ID
     playerTwoGrid: ID
   }
+
+  input GameInput {
+  playerOne: ID
+  turn: ID
+  playerOneGrid: ID
+  }
+
+  input JoinGameInput {
+  playerTwo: ID
+  playerTwoGrid: ID
+  }
+
     
   # Define the Auth type to handle returning data from a user creation or login
   type Auth {
@@ -68,6 +80,10 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
 
     createGrid(ships: [ShipInput]! ): Grid
+
+    createGame(playerOne: GameInput!): Game
+
+    joinGame(playerTwo: JoinGameInput!): Game
     
   }
 `;
