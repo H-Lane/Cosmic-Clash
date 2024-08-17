@@ -15,16 +15,50 @@ const Home = () => {
     // Use Apollo Client's useQuery hook to fetch user grids
     const {loading, data} = useQuery(GET_USER_GRIDS);
    console.log(data)
+   const [joinGame] = useMutation(JOIN_GAME);
+    const [createGame] = useMutation(CREATE_GAME);
+    
+    // Function to handle play button click
+    const handlePlay = async (gridId) => {
+        try {
+            // Attempt to join an existing game with the specified gridId
+            const { data: joinData } = await joinGame({
+                variables: { gridId },
+            });
+
+            // If the joinGame mutation returns data, handle it (game joined successfully)
+            if (joinData.joinGame) {
+                console.log('Game joined:', joinData.joinGame);
+                // Additional logic for successfully joining a game can be added here
+            } else {
+                // If no game was found, create a new game
+                console.log('No game found, creating a new game...');
+                const { data: createData } = await createGame({
+                    variables: { gridId, userId }, // Pass necessary variables
+                });
+                console.log('New game created:', createData.createGame);
+                // Additional logic for successfully creating a game can be added here
+            }
+        } catch (error) {
+            console.error('Error joining/creating game:', error); // Handle any errors
+        }
+    };
+
+    // Function to handle placement logic (stubbed out for now)
+    const handlePlacement = (e) => {
+        // Your existing logic for cell placement
+    };
+   
     //LOADING & ERROR
     // // Conditional rendering based on the query state
     // if (loading) return <p>Loading...</p>; // Show loading message while fetching data
     // if (error) return <p>Error: {error.message}</p>; // Show error message if there is an error
+   
     const handlePlacement = (e) => true
 
     return (
         <div className="container">
-            {/* Render the EmptyGrid component with initial ships, handlePlacement function, and a unique gridId */}
-            {/* The gridId here is "empty", and this should correspond to an initial or default grid */}
+            {/* Render a default EmptyGrid with no data */}
             <EmptyGrid 
                 ships={ships} 
                 handlePlacement={handlePlacement} 
@@ -34,19 +68,18 @@ const Home = () => {
             {/* Navigation link to create a new grid */}
             <Link to="./creategrid">Create A Grid</Link>
 
-            {/* Display the grids fetched from the server */}
+            {/* Render EmptyGrid for each grid fetched from the server */}
             {data && data.grids.map((grid) => (
-                /* Render the EmptyGrid component for each grid with data fetched from the server */
-                /* The key prop is necessary for React to efficiently update the list */
                 <EmptyGrid 
                     key={grid._id} // Unique key for each grid item
-                    ships={grid.ships} // Pass the ships data to the EmptyGrid component
-                    handlePlacement={handlePlacement} // Pass the handlePlacement function to each grid
-                    gridId={grid._id} // Pass the unique gridId to identify each grid
+                    ships={grid.ships} // Pass the ships data to each EmptyGrid
+                    handlePlacement={handlePlacement} // Pass the handlePlacement function
+                    gridId={grid._id} // Pass the unique gridId
+                    onPlay={handlePlay} // Pass the handlePlay function as onPlay prop
                 />
             ))}
         </div>
     );
 };
 
-export default Home; // Export the Home component for use in other parts of the application
+export default Home;

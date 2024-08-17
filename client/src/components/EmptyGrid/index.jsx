@@ -61,8 +61,13 @@ const EmptyGrid = ({ ships, handlePlacement, gridId}) => {
 //   }, [ships]);
 
   // Return the ship board grid
-  return <div className="ship-board">{renderShipBoard()}
-  </div>;
+  return (
+    <div className="ship-board">
+      {renderShipBoard()} {/* Render the ship board grid */}
+      {/* Button to trigger play functionality */}
+      <button onClick={() => onPlay(gridId)}>Play</button>
+    </div>
+  );
 };
 
 export default EmptyGrid;
