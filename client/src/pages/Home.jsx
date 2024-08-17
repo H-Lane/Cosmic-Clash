@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link for navigation
 import { useQuery } from '@apollo/client'; // Import useQuery and gql from Apollo Client
 import EmptyGrid from '../components/EmptyGrid'; // Import the EmptyGrid component
 import { GET_USER_GRIDS } from '../utils/queries';
-
+import { JOIN_GAME, CREATE_GAME } from "../utils/mutations"
 
 const Home = () => {
     // Initialize playermap state with an array of 100 cells filled with 'O'
@@ -34,7 +34,7 @@ const Home = () => {
                 // If no game was found, create a new game
                 console.log('No game found, creating a new game...');
                 const { data: createData } = await createGame({
-                    variables: { gridId, userId }, // Pass necessary variables
+                    variables: { gridId }, // Pass necessary variables
                 });
                 console.log('New game created:', createData.createGame);
                 // Additional logic for successfully creating a game can be added here
@@ -42,11 +42,6 @@ const Home = () => {
         } catch (error) {
             console.error('Error joining/creating game:', error); // Handle any errors
         }
-    };
-
-    // Function to handle placement logic (stubbed out for now)
-    const handlePlacement = (e) => {
-        // Your existing logic for cell placement
     };
    
     //LOADING & ERROR
