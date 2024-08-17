@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Cell from "../Cell/index";
 
+
 // Functional component for rendering the player's ship board
-const EmptyGrid = ({ ships, handlePlacement, gridId}) => {
+const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
   // State to store the ship board grid
 
   const [shipBoard, setShipBoard] = useState([]);
@@ -61,8 +62,15 @@ const EmptyGrid = ({ ships, handlePlacement, gridId}) => {
 //   }, [ships]);
 
   // Return the ship board grid
-  return <div className="ship-board">{renderShipBoard()}
-  </div>;
+  return (
+    <div className="ship-board">
+      {renderShipBoard()}  // Render the entire ship board
+
+      {onPlay && (  // CHANGE: Conditionally render the Play button if `onPlay` prop is provided
+        <button onClick={() => onPlay(gridId)}>Play</button>  // CHANGE: Render Play button with `onPlay` functionality
+      )}
+    </div>
+  );
 };
 
 export default EmptyGrid;
