@@ -41,7 +41,7 @@ mutation createGrid($ships: [ShipInput]!) {
   }
 }`
 
-export const JOIN_GAME = `
+export const JOIN_GAME = gql`
 mutation joinGame($playerTwo: JoinGameInput!) {
   joinGame(playerTwo: $playerTwo) {
     _id
@@ -57,7 +57,7 @@ mutation joinGame($playerTwo: JoinGameInput!) {
 }
 `;
 
-export const CREATE_GAME = `
+export const CREATE_GAME = gql`
 mutation createGame($playerOne: GameInput!) {
   createGame(playerOne: $playerOne) {
     _id

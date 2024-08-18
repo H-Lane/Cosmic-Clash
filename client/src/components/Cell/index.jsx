@@ -17,7 +17,7 @@ export default function Cell({ style, handlePlacement, status, dataPosition, sel
     >
       <button
         className={`btn btn-block ${style || ""}`} // Add style class if provided
-        data-gridId={gridId || ""}
+        data-gridid={gridId || ""}
         style={{
           width: "30px",
           height: "30px",

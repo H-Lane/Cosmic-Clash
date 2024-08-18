@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; // Import React and useState hook
 import { Link } from 'react-router-dom'; // Import Link for navigation
-import { useQuery } from '@apollo/client'; // Import useQuery and gql from Apollo Client
+import { useQuery, useMutation } from '@apollo/client'; // Import useQuery and gql from Apollo Client
 import EmptyGrid from '../components/EmptyGrid'; // Import the EmptyGrid component
 import { GET_USER_GRIDS } from '../utils/queries';
 import { JOIN_GAME, CREATE_GAME } from "../utils/mutations"
@@ -53,12 +53,6 @@ const Home = () => {
 
     return (
         <div className="container">
-            {/* Render a default EmptyGrid with no data */}
-            <EmptyGrid 
-                ships={ships} 
-                handlePlacement={handlePlacement} 
-                gridId="empty" 
-            />
 
             {/* Navigation link to create a new grid */}
             <Link to="./creategrid">Create A Grid</Link>
