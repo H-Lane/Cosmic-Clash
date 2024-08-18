@@ -64,7 +64,8 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
   // Return the ship board grid
   return (
     <div className="ship-board">
-      {renderShipBoard()}  
+
+      {renderShipBoard()} 
 
       {onPlay && (  // CHANGE: Conditionally render the Play button if `onPlay` prop is provided
         <button onClick={() => onPlay(gridId)}>Play</button>  // CHANGE: Render Play button with `onPlay` functionality

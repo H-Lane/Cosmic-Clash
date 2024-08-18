@@ -54,8 +54,7 @@ const Home = () => {
 
     return (
         <div className="container">
-            {/* Render a default EmptyGrid with no data */}
-           
+
 
             {/* Navigation link to create a new grid */}
             <Link to="./creategrid">Create A Grid</Link>
