@@ -99,13 +99,14 @@ const resolvers = {
             { new: true }
           );
 
-          console.log(joinGame);
+          // console.log(joinGame);
 
-          if (!joinGame) {
-            throw new Error("No available game found for joining.");
-          }
+          // if (!joinGame) {
+          //   throw new Error("No available game found for joining.");
+          // }
 
           return joinGame;
+
         } catch (error) {
           console.error(error);
           throw new Error("Failed to join the game.");

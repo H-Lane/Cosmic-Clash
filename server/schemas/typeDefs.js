@@ -95,9 +95,9 @@ const typeDefs = `
 
     createGrid(ships: [ShipInput]! ): Grid
 
-    createGame(playerOne: GameInput!): Game
+    createGame(gridId: String!): Game
 
-    joinGame(playerTwo: JoinGameInput!): Game
+    joinGame(gridId: String!): Game
 
     createAttack(attackData: AttackInput! ): AttackResult
     

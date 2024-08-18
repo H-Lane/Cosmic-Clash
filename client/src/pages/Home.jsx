@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'; // Import Link for navigation
 import { useQuery, useMutation } from '@apollo/client'; // Import useQuery and gql from Apollo Client
 import EmptyGrid from '../components/EmptyGrid'; // Import the EmptyGrid component
 import { GET_USER_GRIDS } from '../utils/queries';
-import { JOIN_GAME, CREATE_GAME } from "../utils/mutations"
+import { JOIN_GAME, CREATE_GAME } from "../utils/mutations"; 
+
 
 const Home = () => {
     // Initialize playermap state with an array of 100 cells filled with 'O'
@@ -53,6 +54,7 @@ const Home = () => {
 
     return (
         <div className="container">
+
 
             {/* Navigation link to create a new grid */}
             <Link to="./creategrid">Create A Grid</Link>
