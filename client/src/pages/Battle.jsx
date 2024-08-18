@@ -15,9 +15,9 @@ function Battle() {
     console.log(e.target.dataset.position);
   };
 
-//   const confirmAttack = (e) => {
+//   const  = (e) => {
 //     e.preventDefault();
-
+confirmAttack
 //     try {
 //         const mutationResponse = await confirmAttack({
 //             variables: { position: atkPosition }
