@@ -41,4 +41,34 @@ mutation createGrid($ships: [ShipInput]!) {
   }
 }`
 
+export const JOIN_GAME = `
+mutation joinGame($playerTwo: JoinGameInput!) {
+  joinGame(playerTwo: $playerTwo) {
+    _id
+    playerOne
+    playerTwo
+    turn
+    firstAttacks
+    secondAttacks
+    winner
+    playerOneGrid
+    playerTwoGrid
+  }
+}
+`;
 
+export const CREATE_GAME = `
+mutation createGame($playerOne: GameInput!) {
+  createGame(playerOne: $playerOne) {
+    _id
+    playerOne
+    playerTwo
+    turn
+    firstAttacks
+    secondAttacks
+    winner
+    playerOneGrid
+    playerTwoGrid
+  }
+}
+`;

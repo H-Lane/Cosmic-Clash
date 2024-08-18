@@ -15,6 +15,7 @@ function Battle() {
     console.log(e.target.dataset.position);
   };
 
+
   const confirmAttack = async (e) => {
     e.preventDefault();
 
