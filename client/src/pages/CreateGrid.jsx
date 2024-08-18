@@ -3,6 +3,8 @@ import EmptyGrid from "../components/EmptyGrid";
 import { useMutation } from "@apollo/client";
 import { CREATE_GRID } from "../utils/mutations";
 import DisplayShips from "../components/Ships";
+import "../../node_modules/uikit/dist/css/uikit.min.css";
+import "../../node_modules/uikit/dist/js/uikit.min.js";
 
 //This is our parent function for the page
 function CreateGrid(props) {

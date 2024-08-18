@@ -15,18 +15,19 @@ function Battle() {
     console.log(e.target.dataset.position);
   };
 
-//   const  = (e) => {
-//     e.preventDefault();
-confirmAttack
-//     try {
-//         const mutationResponse = await confirmAttack({
-//             variables: { position: atkPosition }
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         console.log(error);
-//       }
-//   };
+
+  const confirmAttack = async (e) => {
+    e.preventDefault();
+
+    try {
+        const mutationResponse = await createAttack({
+            variables: { position: atkPosition }
+        });
+    } catch (err) {
+        console.error(err);
+        console.log(error);
+      }
+  };
 
   return (
     <div>
