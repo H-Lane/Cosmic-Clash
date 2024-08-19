@@ -59,8 +59,7 @@ const typeDefs = `
 
   # Define the root Query type with fields to retrieve users and a single user by ID
   type Query {
-    games: [Game]!
-    game(gameId: ID!): Game
+    game(gameId: String!): Game
     me: User
     grids: [Grid]!
   }

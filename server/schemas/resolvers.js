@@ -18,14 +18,10 @@ const resolvers = {
       return Grid.find({ userId: context.user._id });
     },
 
-    //Resolver for fetching all games
-    games: async () => {
-      return Game.find();
-    },
 
     //Resolver for fetching a single game by ID
-    game: async (parent, args, { gameId }) => {
-      return Game.findOne({ _id: gameId });
+    game: async (parent, { gameId }) => {
+      return Game.findOne({ _id: new Types.ObjectId(gameId) });
     },
   },
 
