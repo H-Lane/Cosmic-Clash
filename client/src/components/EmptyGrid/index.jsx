@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Cell from "../Cell/index";
+import 'uikit/dist/css/uikit.min.css'; // Import UIkit CSS
+import 'uikit/dist/js/uikit.min.js';
 
 
 // Functional component for rendering the player's ship board
+
 const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
   // State to store the ship board grid
 
@@ -14,14 +17,15 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
     }
     return false;
   };
+
   // Function to render a single cell in the grid
   const renderCell = (i) => {
     const status = ships[i]; // Assuming this returns 'O' or 'X'
     const style = status === "O" ? "btn-O" : status === "X" ? "btn-X" : "";
-
+    
     return (
       <Cell
-      gridId={gridId}
+        gridId={gridId}
         style={positionSelected(i + 1) ? "btn-X" : "btn-O"}
         status={positionSelected(i + 1) ? "X" : "O"}
         handlePlacement={handlePlacement}
@@ -40,19 +44,18 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
       cellsInRow.push(renderCell(rowIndex + x));
     }
 
-    return <div key={rowIndex}>{cellsInRow}</div>;
+    return <div key={rowIndex} style={{ display: "flex" }}>{cellsInRow}</div>;
   };
-
+  
   // Function to render the entire ship board grid
   const renderShipBoard = () => {
     const rows = [];
-
     for (let i = 0; i < 10; i++) {
       rows.push(renderRow(i * 10));
-    }
+      }
     return rows;
-    //setShipBoard(rows);
   };
+
 
   // Render the ship board when the component mounts
 //   useEffect(() => {
@@ -63,7 +66,17 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
 
   // Return the ship board grid
   return (
-    <div className="ship-board">
+    <div
+      className="ship-board"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+        margin: "0 auto",
+      }}
+    >
 
       {renderShipBoard()} 
 

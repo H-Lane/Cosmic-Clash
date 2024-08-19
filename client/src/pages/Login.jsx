@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { LOGIN } from '../utils/mutations';
-import Auth from '../utils/auth';
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { LOGIN } from "../utils/mutations";
+import Auth from "../utils/auth";
+import "../../node_modules/uikit/dist/css/uikit.css";
+import "../../node_modules/uikit/dist/js/uikit.min.js";
 
 function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
 
   const handleFormSubmit = async (event) => {
@@ -30,40 +32,80 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
+    <div className="uk-flex uk-flex-center uk-margin-large-top">
+      <img
+        src="/galaxy.jpeg"
+        alt="Background"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1 /* Ensure it stays behind other content */,
+        }}
+      />
+      <div className="uk-card uk-card-default uk-card-body uk-width-large">
+        <Link
+          to="/signup"
+          className="uk-link-heading uk-text-small uk-align-right"
+        >
+          ← Go to Signup
+        </Link>
 
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+        <h2 className="uk-heading-line uk-text-center">
+          <span>Login</span>
+        </h2>
+
+        <form
+          onSubmit={handleFormSubmit}
+          className="uk-form-stacked uk-margin-medium-top"
+        >
+          <div className="uk-margin">
+            <label htmlFor="email" className="uk-form-label">
+              Email address:
+            </label>
+            <div className="uk-form-controls">
+              <input
+                className="uk-input"
+                placeholder="youremail@test.com"
+                name="email"
+                type="email"
+                id="email"
+                onChange={handleChange}
+              />
+            </div>
           </div>
-        ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+          <div className="uk-margin">
+            <label htmlFor="pwd" className="uk-form-label">
+              Password:
+            </label>
+            <div className="uk-form-controls">
+              <input
+                className="uk-input"
+                placeholder="******"
+                name="password"
+                type="password"
+                id="pwd"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          {error ? (
+            <div>
+              <p className="error-text">
+                The provided credentials are incorrect
+              </p>
+            </div>
+          ) : null}
+          <div className="uk-flex uk-flex-right">
+            <button className="uk-button uk-button-primary" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
