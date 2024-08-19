@@ -10,7 +10,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship1"
               data-size="5"
               onClick={shipSetter}
-            ></button>
+            > Carrier</button>
           </li>
         )}
         {showShips.includes("ship2") && (
@@ -19,7 +19,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship2"
               data-size="4"
               onClick={shipSetter}
-            ></button>
+            > Battleship</button>
           </li>
         )}
         {showShips.includes("ship3") && (
@@ -28,7 +28,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship3"
               data-size="3"
               onClick={shipSetter}
-            ></button>
+            > Destroyer</button>
           </li>
         )}
         {showShips.includes("ship4") && (
@@ -37,7 +37,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship4"
               data-size="3"
               onClick={shipSetter}
-            ></button>
+            > Submarine</button>
           </li>
         )}
         {showShips.includes("ship5") && (
@@ -46,7 +46,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship5"
               data-size="2"
               onClick={shipSetter}
-            ></button>
+            > Patrol</button>
           </li>
         )}
       </ul>
