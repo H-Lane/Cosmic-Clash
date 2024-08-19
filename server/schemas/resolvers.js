@@ -13,6 +13,10 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    username: async (parent, { userId }, context) => {
+      return User.findOne({ _id: new Types.ObjectId(userId) })
+    },
+
     grids: async (parent, args, context) => {
       console.log(context.user);
       return Grid.find({ userId: context.user._id });
@@ -95,12 +99,6 @@ const resolvers = {
             { new: true }
           );
 
-          // console.log(joinGame);
-
-          // if (!joinGame) {
-          //   throw new Error("No available game found for joining.");
-          // }
-
           return joinGame;
         } catch (error) {
           console.error(error);
@@ -164,6 +162,10 @@ const resolvers = {
           ship.position.every((pos) => attackArray.includes(pos))
         );
 
+        if (allShipsSunk) {
+          game.winner = context.user._id
+        };
+
         return {
           success: true,
           hit,
@@ -173,6 +175,7 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+
   },
 };
 

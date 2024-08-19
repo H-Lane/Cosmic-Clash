@@ -62,6 +62,7 @@ const typeDefs = `
     game(gameId: String!): Game
     me: User
     grids: [Grid]!
+    username(userId: String!): User
   }
 
     
@@ -81,6 +82,7 @@ const typeDefs = `
     hit: Boolean!
     shipSunk: Boolean
     allShipsSunk: Boolean
+    winner: String
   }
 
   # Define the root Mutation type with fields to add a user, log in, 
@@ -99,6 +101,7 @@ const typeDefs = `
     joinGame(gridId: String!): Game
 
     createAttack(position: Int!, gameId: String! ): AttackResult
+
     
   }
 `;
