@@ -6,6 +6,7 @@ import Auth from "../utils/auth";
 import "../../node_modules/uikit/dist/css/uikit.css";
 import "../../node_modules/uikit/dist/js/uikit.min.js";
 
+
 function Login(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
@@ -34,7 +35,7 @@ function Login(props) {
   return (
     <div className="uk-flex uk-flex-center uk-margin-large-top">
       <img
-        src="/galaxy.jpeg"
+        src="\src\assets\galaxy.jpeg" 
         alt="Background"
         style={{
           position: "absolute",
