@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"; // Import React and useState hook
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link, Navigate } from "react-router-dom"; // Import Link for navigation
 import { useQuery, useMutation, useLazyQuery } from "@apollo/client"; // Import useQuery and gql from Apollo Client
 import EmptyGrid from "../components/EmptyGrid"; // Import the EmptyGrid component
 import { GET_USER_GRIDS, GET_GAME } from "../utils/queries";
@@ -18,36 +18,37 @@ const Home = () => {
   const [createGame] = useMutation(CREATE_GAME);
   const [getGame, { data: gameData }] = useLazyQuery(GET_GAME);
   const [gameDataUpdated, setGameDataUpdated] = useState(false);
+  let playerJoined;
 
-  useEffect(() => {
-    console.log(gameData);
-    const handleGameData = () => {
-      console.log(gameData);
-      //console.log(gameData.game._id);
-      if (gameData && gameData.game) {
-        const { playerTwo, _id } = gameData.game;
-        if (!playerTwo) {
-          console.log("No Opponent Found");
-        } else {
-          console.log("Opponent Found!");
-          redirect(_id);
-        }
-      }
-    };
-    if (gameDataUpdated) {
-      handleGameData();
-      setGameDataUpdated(false);
-    } else {
-      handleGameData();
-      setGameDataUpdated(true);
-    }
-  }, [gameData, gameDataUpdated]);
+  // useEffect(() => {
+  //   console.log(gameData);
+  //   const handleGameData = () => {
+  //     console.log(gameData);
+  //     //console.log(gameData.game._id);
+  //     if (gameData && gameData.game) {
+  //       const { playerTwo, _id } = gameData.game;
+  //       if (!playerTwo) {
+  //         console.log("No Opponent Found");
+  //       } else {
+  //         console.log("Opponent Found!");
+  //         <Navigate to={`./battle/${_id}`} />
+  //       }
+  //     }
+  //   };
+  //   if (gameDataUpdated) {
+  //     handleGameData();
+  //     setGameDataUpdated(false);
+  //   } else {
+  //     handleGameData();
+  //     setGameDataUpdated(true);
+  //   }
+  // }, [gameData, gameDataUpdated]);
 
-  useEffect(() => {
-    if (gameData) {
-      setGameDataUpdated(true);
-    }
-  }, [gameData]);
+  // useEffect(() => {
+  //   if (gameData) {
+  //     setGameDataUpdated(true);
+  //   }
+  // }, [gameData]);
 
   // Function to handle play button click
   const handlePlay = async (gridId) => {
@@ -62,6 +63,7 @@ const Home = () => {
         console.log("Game joined:", joinData.joinGame);
         const gameId = joinData.joinGame._id;
         redirect(gameId);
+        //<Navigate to={`/battle/${gameId}`} />
         // Additional logic for successfully joining a game can be added here
       } else {
         // If no game was found, create a new game
@@ -72,9 +74,7 @@ const Home = () => {
         console.log("New game created:", createData.createGame);
         const gameId = createData.createGame._id;
 
-        let searching;
-        searchForOpp(gameId);
-        setInterval(() => searchForOpp(gameId), 3000);
+        playerJoined = setInterval(() => searchForOpp(gameId), 3000);
 
         // Additional logic for successfully creating a game can be added here
       }
@@ -83,9 +83,15 @@ const Home = () => {
     }
   };
 
-  const searchForOpp = (gameId) => {
+  const searchForOpp = async (gameId) => {
     console.log(gameId);
-    getGame({ variables: { gameId } });
+    const gameHolder = await getGame({ variables: { gameId } });
+    console.log(gameHolder)
+    console.log(gameHolder.data.game.playerTwo)
+    if (gameHolder.data.game.playerTwo) {
+      redirect(gameId)
+      //<Navigate to={`/battle/${gameId}`} />
+    }
   };
 
   const redirect = (gameId) => {
@@ -102,7 +108,7 @@ const Home = () => {
   return (
     <div className="container">
     <img
-    src="\src\assets\gal.PNG"  
+    src="\gal.PNG"  
     alt="Background"
     style={{
       position: "absolute",

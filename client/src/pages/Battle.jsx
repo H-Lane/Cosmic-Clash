@@ -55,7 +55,7 @@ function Battle() {
   return (
     <div>
        <img
-    src="\src\assets\gal.PNG"  
+    src="\gal.PNG"  
     alt="Background"
     style={{
       position: "absolute",

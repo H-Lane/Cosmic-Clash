@@ -39,8 +39,9 @@ const DisplayShips = ({ shipSetter, showShips }) => {
                 borderRadius: '4px',
               }}
             >
-              Ship 1
+              Carrier
             </button>
+
           </li>
         )}
         {showShips.includes("ship2") && (
@@ -50,6 +51,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship"
               data-size="4"
               onClick={shipSetter}
+
               style={{
                 ...getButtonSize('4'),
                 backgroundColor: 'gray',
@@ -58,7 +60,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
                 borderRadius: '4px',
               }}
             >
-              Ship 2
+             Battleship
             </button>
           </li>
         )}
@@ -77,7 +79,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
                 borderRadius: '4px',
               }}
             >
-              Ship 3
+              Destroyer
             </button>
           </li>
         )}
@@ -88,6 +90,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship4"
               data-size="3"
               onClick={shipSetter}
+
               style={{
                 ...getButtonSize('3'),
                 backgroundColor: 'gray',
@@ -96,7 +99,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
                 borderRadius: '4px',
               }}
             >
-              Ship 4
+              Submarine
             </button>
           </li>
         )}
@@ -107,6 +110,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
               data-name="ship5"
               data-size="2"
               onClick={shipSetter}
+
               style={{
                 ...getButtonSize('2'),
                 backgroundColor: 'gray',
@@ -115,7 +119,7 @@ const DisplayShips = ({ shipSetter, showShips }) => {
                 borderRadius: '4px',
               }}
             >
-              Ship 5
+              Patrol
             </button>
           </li>
         )}
