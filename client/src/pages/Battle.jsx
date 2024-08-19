@@ -68,8 +68,9 @@ function Battle() {
     }}
     />  
       <AttackGrid atkPosition={atkPosition} selectSquare={selectSquare} />
-      {currentTurn && 
-      <button onClick={confirmAttack}>LAUNCH ATTACK</button>}
+      {/* {currentTurn && ( */}
+      <button onClick={confirmAttack}>LAUNCH ATTACK</button>
+      {/* )} */}
     </div>
   );
 }
