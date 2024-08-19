@@ -9,8 +9,8 @@ import { CREATE_ATTACK } from "../utils/mutations"
 function Battle() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [atkPosition, setAtkPosition] = useState(0);
-  const gameId = useParams();
-  console.log(gameId);
+  const rawGameId = useParams();
+  const gameId = rawGameId.id
 
   const [createAttack, { data }] = useMutation(CREATE_ATTACK);
 
@@ -21,17 +21,19 @@ function Battle() {
 
   const confirmAttack = async (e) => {
     e.preventDefault();
+    console.log(atkPosition)
+    console.log(gameId)
 
     try {
       const mutationResponse = await createAttack({
         variables: {
           position: atkPosition,
-          gameId: gameId,
+          gameId: gameId
         },
       });
+      console.log(mutationResponse);
     } catch (err) {
       console.error(err);
-      console.log(error);
     }
   };
 
