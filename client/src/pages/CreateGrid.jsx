@@ -37,7 +37,8 @@ function CreateGrid(props) {
       const mutationResponse = await createGrid({
         variables: { ships: ships },
       });
-      console.log("SAVED");
+      console.log("SAVED")
+      redirect();
     } catch (err) {
       console.error(err);
     }
@@ -92,6 +93,10 @@ function CreateGrid(props) {
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const redirect = () => {
+    window.location.href = `./home`;
   };
 
   return (
