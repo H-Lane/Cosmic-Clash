@@ -49,6 +49,7 @@ export const GET_GAME = gql`
   }
 `; 
 
+
 export const GET_TURN = gql`
   query getGame($gameId: String!) {
     game(gameId: $gameId) {
@@ -56,4 +57,13 @@ export const GET_TURN = gql`
     }
   }
 `; 
+
+export const GET_USERNAME = gql`
+  query Query($userId: String!) {
+    username(userId: $userId) {
+      _id
+      username
+    }
+  }
+`;
 
