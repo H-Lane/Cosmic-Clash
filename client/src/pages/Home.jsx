@@ -16,27 +16,36 @@ const Home = () => {
   const [joinGame] = useMutation(JOIN_GAME);
   const [createGame] = useMutation(CREATE_GAME);
   const [getGame, { data: gameData }] = useLazyQuery(GET_GAME);
+  const [gameDataUpdated, setGameDataUpdated] = useState(false);
 
   useEffect(() => {
     console.log(gameData);
     const handleGameData = () => {
       console.log(gameData);
-      console.log(gameData.game._id);
-      if (gameData) {
-        const { playerTwo } = gameData.game;
-        const gameId = gameData.game._id;
-        searchForOpp(gameId)
+      //console.log(gameData.game._id);
+      if (gameData && gameData.game) {
+        const { playerTwo, _id } = gameData.game;
         if (!playerTwo) {
           console.log("No Opponent Found");
         } else {
           console.log("Opponent Found!");
-          redirect(gameId);
+          redirect(_id);
         }
       }
     };
-    setTimeout(() => {
+    if (gameDataUpdated) {
       handleGameData();
-    }, 1000);
+      setGameDataUpdated(false);
+    } else {
+      handleGameData();
+      setGameDataUpdated(true);
+    }
+  }, [gameData, gameDataUpdated]);
+
+  useEffect(() => {
+    if (gameData) {
+      setGameDataUpdated(true);
+    }
   }, [gameData]);
 
   // Function to handle play button click

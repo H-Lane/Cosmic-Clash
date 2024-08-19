@@ -38,6 +38,7 @@ function CreateGrid(props) {
         variables: { ships: ships },
       });
       console.log("SAVED")
+      redirect();
     } catch (err) {
       console.error(err);
     }
@@ -92,6 +93,10 @@ function CreateGrid(props) {
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const redirect = () => {
+    window.location.href = `./home`;
   };
 
   return (
