@@ -5,7 +5,8 @@ import EmptyGrid from "../components/EmptyGrid"; // Import the EmptyGrid compone
 import { GET_USER_GRIDS } from "../utils/queries";
 import { JOIN_GAME, CREATE_GAME } from "../utils/mutations";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import "../../node_modules/uikit/dist/css/uikit.css";
+import "../../node_modules/uikit/dist/js/uikit.min.js";
 const Home = () => {
   // Initialize playermap state with an array of 100 cells filled with 'O'
   const [ships, setPlayermap] = useState(Array(100).fill("O"));
@@ -68,6 +69,19 @@ const Home = () => {
 
   return (
     <div className="container">
+    <img
+    src="\src\assets\gal.PNG"  
+    alt="Background"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      zIndex: -1, // Ensure it stays behind other content
+    }}
+    />
       {/* Navigation link to create a new grid */}
       <Link to="./creategrid">Create A Grid</Link>
 

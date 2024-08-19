@@ -39,6 +39,19 @@ function Battle() {
 
   return (
     <div>
+       <img
+    src="\src\assets\gal.PNG"  
+    alt="Background"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      zIndex: -1, // Ensure it stays behind other content
+    }}
+    />  
       <AttackGrid atkPosition={atkPosition} selectSquare={selectSquare} />
       <button onClick={confirmAttack}>LAUNCH ATTACK</button>
     </div>

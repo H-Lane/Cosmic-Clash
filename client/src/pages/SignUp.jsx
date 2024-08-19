@@ -41,7 +41,7 @@ function Signup(props) {
   return (
     <div className="uk-flex uk-flex-center uk-margin-large-top">
       <img 
-        src="/galaxy.jpeg" 
+       src="\src\assets\galaxy.jpeg" 
         alt="Background" 
         style={{
           position: 'absolute', 
