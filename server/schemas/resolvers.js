@@ -106,7 +106,6 @@ const resolvers = {
           // }
 
           return joinGame;
-
         } catch (error) {
           console.error(error);
           throw new Error("Failed to join the game.");
@@ -116,17 +115,14 @@ const resolvers = {
     },
 
     createAttack: async (parent, { gameId, position }, context) => {
-
+      const newGameId = new Types.ObjectId(gameId)
       if (context.user) {
-        const game = await Game.findById(gameId).populate(
-          "playerOneGrid playerTwoGrid"
-        );
+        const game = await Game.findById(newGameId).populate("playerOneGrid playerTwoGrid");
 
-        
         if (!game) {
           throw new Error("Game not found");
         }
-        console.log("gamefound")
+        console.log("gamefound");
 
         // Determine which player's turn it is - boolean that equals true for playerOne and false if its playerTwo's turn
         const isPlayerOneTurn = game.turn === game.playerOne ? true : false;
