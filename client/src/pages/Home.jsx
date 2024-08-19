@@ -38,6 +38,11 @@ const Home = () => {
         });
         console.log("New game created:", createData.createGame);
         const gameId = createData.createGame._id;
+        
+
+        
+
+
         redirect(gameId);
         // Additional logic for successfully creating a game can be added here
       }
@@ -45,6 +50,10 @@ const Home = () => {
       console.error("Error joining/creating game:", error); // Handle any errors
     }
   };
+
+  const searchForOpp = () => {
+
+  }
 
   const redirect = (gameId) => {
     window.location.href = `./battle/${gameId}`;

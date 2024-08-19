@@ -37,6 +37,7 @@ function CreateGrid(props) {
       const mutationResponse = await createGrid({
         variables: { ships: ships },
       });
+      console.log("SAVED")
     } catch (err) {
       console.error(err);
     }
