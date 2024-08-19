@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EmptyGrid from "../components/EmptyGrid";
 import { useMutation } from "@apollo/client";
 import AttackGrid from "../components/AttackGrid";
-//import { CREATE_ATTACK } from "../utils/mutations"
+import { CREATE_ATTACK } from "../utils/mutations"
 
 function Battle() {
   const [showConfirm, setShowConfirm] = useState(false);

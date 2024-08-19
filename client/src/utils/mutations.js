@@ -72,3 +72,13 @@ mutation createGame($gridId: String!) {
   }
 }
 `;
+
+export const CREATE_ATTACK = gql`
+  mutation CreateAttack($position: Int!, $gameId: String!) {
+    createAttack(position: $position, gameId: $gameId) {
+      hit
+      shipSunk
+      allShipsSunk
+    }
+  }
+`;
