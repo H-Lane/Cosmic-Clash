@@ -14,14 +14,24 @@ const resolvers = {
     },
 
     username: async (parent, { userId }, context) => {
-      return User.findOne({ _id: new Types.ObjectId(userId) })
+      return User.findOne({ _id: new Types.ObjectId(userId) });
+    },
+
+    turn: async (parent, { gameId }, context) => {
+      
+      const turn = await Game.findOne({ _id: new Types.ObjectId(gameId) });
+
+      if (turn.turn === context.user._id) {
+        return true
+      } else {
+        return false
+      };
     },
 
     grids: async (parent, args, context) => {
       console.log(context.user);
       return Grid.find({ userId: context.user._id });
     },
-
 
     //Resolver for fetching a single game by ID
     game: async (parent, { gameId }, context) => {
@@ -109,9 +119,11 @@ const resolvers = {
     },
 
     createAttack: async (parent, { gameId, position }, context) => {
-      const newGameId = new Types.ObjectId(gameId)
+      const newGameId = new Types.ObjectId(gameId);
       if (context.user) {
-        const game = await Game.findById(newGameId).populate("playerOneGrid playerTwoGrid");
+        const game = await Game.findById(newGameId).populate(
+          "playerOneGrid playerTwoGrid"
+        );
 
         if (!game) {
           throw new Error("Game not found");
@@ -163,8 +175,8 @@ const resolvers = {
         );
 
         if (allShipsSunk) {
-          game.winner = context.user._id
-        };
+          game.winner = context.user._id;
+        }
 
         return {
           success: true,
@@ -176,7 +188,6 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
-
   },
 };
 

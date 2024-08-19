@@ -63,6 +63,7 @@ const typeDefs = `
     me: User
     grids: [Grid]!
     username(userId: String!): User
+    turn(gameId: String!): Boolean
   }
 
     
