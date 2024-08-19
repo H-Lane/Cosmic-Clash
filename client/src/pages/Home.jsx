@@ -25,6 +25,7 @@ const Home = () => {
       if (gameData) {
         const { playerTwo } = gameData.game;
         const gameId = gameData.game._id;
+        searchForOpp(gameId)
         if (!playerTwo) {
           console.log("No Opponent Found");
         } else {
