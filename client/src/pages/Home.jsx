@@ -62,7 +62,8 @@ const Home = () => {
       if (joinData.joinGame) {
         console.log("Game joined:", joinData.joinGame);
         const gameId = joinData.joinGame._id;
-        <Navigate to={`./battle/${gameId}`} />
+        redirect(gameId);
+        //<Navigate to={`/battle/${gameId}`} />
         // Additional logic for successfully joining a game can be added here
       } else {
         // If no game was found, create a new game
@@ -88,8 +89,8 @@ const Home = () => {
     console.log(gameHolder)
     console.log(gameHolder.data.game.playerTwo)
     if (gameHolder.data.game.playerTwo) {
-      clearInterval(playerJoined);
-      <Navigate to={`./battle/${gameId}`} />
+      redirect(gameId)
+      //<Navigate to={`/battle/${gameId}`} />
     }
   };
 
@@ -107,7 +108,7 @@ const Home = () => {
   return (
     <div className="container">
     <img
-    src="\src\assets\gal.PNG"  
+    src="\gal.PNG"  
     alt="Background"
     style={{
       position: "absolute",

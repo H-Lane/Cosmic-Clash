@@ -35,7 +35,7 @@ function Login(props) {
   return (
     <div className="uk-flex uk-flex-center uk-margin-large-top">
       <img
-        src="\src\assets\galaxy.jpeg" 
+        src="\galaxy.jpeg" 
         alt="Background"
         style={{
           position: "absolute",
