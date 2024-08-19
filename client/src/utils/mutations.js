@@ -41,4 +41,44 @@ mutation createGrid($ships: [ShipInput]!) {
   }
 }`
 
+export const JOIN_GAME = gql`
+ mutation joinGame($gridId: String!) {
+    joinGame(gridId: $gridId) {
+      _id
+      playerOne
+      playerTwo
+      turn
+      firstAttacks
+      secondAttacks
+      winner
+      playerOneGrid
+      playerTwoGrid
+    }
+  }
+`;
 
+export const CREATE_GAME = gql`
+mutation createGame($gridId: String!) {
+  createGame(gridId: $gridId) {
+    _id
+    playerOne
+    playerTwo
+    turn
+    firstAttacks
+    secondAttacks
+    winner
+    playerOneGrid
+    playerTwoGrid
+  }
+}
+`;
+
+export const CREATE_ATTACK = gql`
+  mutation CreateAttack($position: Int!, $gameId: String!) {
+    createAttack(position: $position, gameId: $gameId) {
+      hit
+      shipSunk
+      allShipsSunk
+    }
+  }
+`;

@@ -3,7 +3,6 @@ const { User, Game, Grid } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 const { Types } = require("mongoose");
 
-
 // Define the resolvers for the GraphQL queries and mutations
 const resolvers = {
   Query: {
@@ -14,10 +13,9 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-
-    grids: async ( parent,args,context ) => {
-      console.log(context.user)
-      return Grid.find({userId: context.user._id});
+    grids: async (parent, args, context) => {
+      console.log(context.user);
+      return Grid.find({ userId: context.user._id });
     },
 
     //Resolver for fetching all games
@@ -45,7 +43,7 @@ const resolvers = {
     // Resolver for logging in an existing user
     login: async (parent, { email, password }) => {
       // Find the user by email
-      console.log(email,password)
+      console.log(email, password);
       const user = await User.findOne({ email });
 
       // If the user is not found, throw an authentication error
@@ -78,28 +76,108 @@ const resolvers = {
     },
     createGame: async (parent, { gridId }, context) => {
       if (context.user) {
-        const newGame = (await Game.create({ playerOne: context.user._id, turn: context.user._id, playerOneGrid: new Types.ObjectId(gridId) }));
-        
+        const newGame = await Game.create({
+          playerOne: context.user._id,
+          turn: context.user._id,
+          playerOneGrid: new Types.ObjectId(gridId),
+        });
+
         return newGame;
       }
       throw new AuthenticationError("Not logged in");
     },
+    // should turn be set to playerTwo once they join the game?
     joinGame: async (parent, { gridId }, context) => {
       if (context.user) {
-        const joinGame = await Game.findOneAndUpdate(
-          { playerTwo: null },
-          {
-            playerTwo: context.user._id,
-            playerTwoGrid: new Types.ObjectId(gridId),
-          }
-        );
-      
-        return joinGame;
+        try {
+          const joinGame = await Game.findOneAndUpdate(
+            { playerTwo: null },
+            {
+              playerTwo: context.user._id,
+              playerTwoGrid: new Types.ObjectId(gridId),
+            },
+            { new: true }
+          );
+
+          // console.log(joinGame);
+
+          // if (!joinGame) {
+          //   throw new Error("No available game found for joining.");
+          // }
+
+          return joinGame;
+        } catch (error) {
+          console.error(error);
+          throw new Error("Failed to join the game.");
+        }
       }
       throw new AuthenticationError("Not logged in");
     },
 
-  }
+    createAttack: async (parent, { gameId, position }, context) => {
+      const newGameId = new Types.ObjectId(gameId)
+      if (context.user) {
+        const game = await Game.findById(newGameId).populate("playerOneGrid playerTwoGrid");
+
+        if (!game) {
+          throw new Error("Game not found");
+        }
+        console.log("gamefound");
+
+        // Determine which player's turn it is - boolean that equals true for playerOne and false if its playerTwo's turn
+        const isPlayerOneTurn = game.turn === game.playerOne ? true : false;
+
+        // If playerOne is true, attack playerTwo grid; else, it's playerTwo's turn and attack playerOne grid
+        const playerGrid = isPlayerOneTurn
+          ? game.playerTwoGrid
+          : game.playerOneGrid;
+
+        // Stores the attacks in the correct array
+        const attackArray = isPlayerOneTurn
+          ? game.firstAttacks
+          : game.secondAttacks;
+
+        //Check attackarray against position array for duplicate attacks
+        if (attackArray.includes(position)) {
+          throw new Error("Position already attacked");
+        }
+
+        // Check if the attack hits a ship
+        const hit = playerGrid.ships.some((ship) =>
+          ship.position.includes(position)
+        );
+
+        // Add the attack to the array
+        if (hit) {
+          attackArray.push(position);
+        }
+
+        // Update the turn
+        game.turn = isPlayerOneTurn ? game.playerTwo : game.playerOne;
+
+        // Save the game state after updating the attack array
+        await game.save();
+
+        // Check if a ship is sunk
+        const shipSunk = playerGrid.ships.some((ship) =>
+          ship.position.every((pos) => attackArray.includes(pos))
+        );
+
+        // Check if all ships are sunk
+        const allShipsSunk = playerGrid.ships.every((ship) =>
+          ship.position.every((pos) => attackArray.includes(pos))
+        );
+
+        return {
+          success: true,
+          hit,
+          shipSunk,
+          allShipsSunk,
+        };
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+  },
 };
 
 // Export the resolvers as a module

@@ -3,9 +3,14 @@ import Cell from "../Cell/index";
 import 'uikit/dist/css/uikit.min.css'; // Import UIkit CSS
 import 'uikit/dist/js/uikit.min.js';
 
+
 // Functional component for rendering the player's ship board
-const EmptyGrid = ({ ships, handlePlacement, gridId }) => {
-  // Function to check if a position is selected
+
+const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
+  // State to store the ship board grid
+
+  const [shipBoard, setShipBoard] = useState([]);
+
   const positionSelected = (pos) => {
     for (let ship of ships) {
       if (ship.position.includes(pos)) return true;
@@ -45,7 +50,15 @@ const EmptyGrid = ({ ships, handlePlacement, gridId }) => {
     return rows;
   };
 
-  // Return the ship board grid centered on the page
+
+  // Render the ship board when the component mounts
+//   useEffect(() => {
+//     if (ships && ships.length > 0) {
+//       renderShipBoard();
+//     }
+//   }, [ships]);
+
+  // Return the ship board grid
   return (
     <div
       className="ship-board"
@@ -58,7 +71,12 @@ const EmptyGrid = ({ ships, handlePlacement, gridId }) => {
         margin: "0 auto",
       }}
     >
-      <div>{renderShipBoard()}</div>
+
+      {renderShipBoard()} 
+
+      {onPlay && (  // CHANGE: Conditionally render the Play button if `onPlay` prop is provided
+        <button onClick={() => onPlay(gridId)}>Play</button>  // CHANGE: Render Play button with `onPlay` functionality
+      )}
     </div>
   );
 };

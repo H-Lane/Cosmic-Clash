@@ -41,9 +41,10 @@ const typeDefs = `
   input GameInput {
   playerOne: ID
   turn: ID
-  playerOneGrid: ID
+  playerOneGrid: ID!
   }
 
+  #Should turn be in the JoinGameInput?
   input JoinGameInput {
   playerTwo: ID
   playerTwoGrid: ID
@@ -66,8 +67,21 @@ const typeDefs = `
 
     
   input ShipInput {
-  shipName: String
-  position: [Int]
+    shipName: String
+    position: [Int]
+  }
+
+  # Define the input type for an attack
+  input AttackInput {
+    gameId: ID!
+    gridId: ID!
+  }
+
+  # Define the result type of an attack
+  type AttackResult {
+    hit: Boolean!
+    shipSunk: Boolean
+    allShipsSunk: Boolean
   }
 
   # Define the root Mutation type with fields to add a user, log in, 
@@ -81,9 +95,11 @@ const typeDefs = `
 
     createGrid(ships: [ShipInput]! ): Grid
 
-    createGame(playerOne: GameInput!): Game
+    createGame(gridId: String!): Game
 
-    joinGame(playerTwo: JoinGameInput!): Game
+    joinGame(gridId: String!): Game
+
+    createAttack(position: Int!, gameId: String! ): AttackResult
     
   }
 `;
