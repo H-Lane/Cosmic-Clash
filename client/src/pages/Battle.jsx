@@ -10,7 +10,7 @@ function Battle() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [atkPosition, setAtkPosition] = useState(0);
   const [currentTurn, setCurrentTurn] = useState(false);
-  const [getTurn, { data: turnData }] = useLazyQuery(GET_GAME);
+  const [getTurn, { data: turnData }] = useLazyQuery(GET_TURN);
   const [createAttack, { data }] = useMutation(CREATE_ATTACK);
 
   const rawGameId = useParams();
@@ -22,7 +22,7 @@ function Battle() {
     await getTurn({
       variables: { gameId },
     });
-    if (getTurn) {
+    if (turnData) {
       setCurrentTurn(true)
     } else {
       setCurrentTurn(false)
