@@ -112,7 +112,7 @@ function CreateGrid(props) {
       }}
     >
       <img
-        src="dist\src\assets\gal.PNG"  
+        src="\gal.PNG"  
         alt="Background"
         style={{
           position: "absolute",
