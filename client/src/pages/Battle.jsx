@@ -1,18 +1,33 @@
 import React, { useState } from "react";
 import EmptyGrid from "../components/EmptyGrid";
-import { useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { Routes, Route, useParams } from "react-router-dom";
 import AttackGrid from "../components/AttackGrid";
-import { CREATE_ATTACK } from "../utils/mutations"
-
+import { CREATE_ATTACK } from "../utils/mutations";
+import { GET_TURN } from "../utils/queries";
 
 function Battle() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [atkPosition, setAtkPosition] = useState(0);
-  const rawGameId = useParams();
-  const gameId = rawGameId.id
-
+  const [currentTurn, setCurrentTurn] = useState(false);
+  const [getTurn, { data: turnData }] = useLazyQuery(GET_GAME);
   const [createAttack, { data }] = useMutation(CREATE_ATTACK);
+
+  const rawGameId = useParams();
+  const gameId = rawGameId.id;
+
+  setInterval(() => checkTurn, 1000);
+
+  const checkTurn = async () => {
+    await getTurn({
+      variables: { gameId },
+    });
+    if (getTurn) {
+      setCurrentTurn(true)
+    } else {
+      setCurrentTurn(false)
+    }
+  };
 
   const selectSquare = (e) => {
     setAtkPosition(parseInt(e.target.dataset.position));
@@ -21,14 +36,14 @@ function Battle() {
 
   const confirmAttack = async (e) => {
     e.preventDefault();
-    console.log(atkPosition)
-    console.log(gameId)
+    console.log(atkPosition);
+    console.log(gameId);
 
     try {
       const mutationResponse = await createAttack({
         variables: {
           position: atkPosition,
-          gameId: gameId
+          gameId: gameId,
         },
       });
       console.log(mutationResponse);
@@ -40,7 +55,8 @@ function Battle() {
   return (
     <div>
       <AttackGrid atkPosition={atkPosition} selectSquare={selectSquare} />
-      <button onClick={confirmAttack}>LAUNCH ATTACK</button>
+      {currentTurn && 
+      <button onClick={confirmAttack}>LAUNCH ATTACK</button>}
     </div>
   );
 }
