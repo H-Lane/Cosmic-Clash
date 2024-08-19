@@ -125,7 +125,7 @@ function CreateGrid(props) {
         }}
       />
       <EmptyGrid ships={ships} handlePlacement={handlePlacement} />
-      <div style={{ marginTop: "20px" }}>
+      <div style={{ marginTop: "5px" }}>
         <button
           onClick={handleShipSave}
           className="uk-button uk-button-primary"
