@@ -20,6 +20,9 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
 
   // Function to render a single cell in the grid
   const renderCell = (i) => {
+    const status = ships[i]; // Assuming this returns 'O' or 'X'
+    const style = status === "O" ? "btn-O" : status === "X" ? "btn-X" : "";
+    
     return (
       <Cell
         gridId={gridId}
@@ -33,20 +36,23 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
     );
   };
 
+  // Function to render a row of cells in the grid
+  const renderRow = (rowIndex) => {
+    const cellsInRow = [];
+
+    for (let x = 0; x < 10; x++) {
+      cellsInRow.push(renderCell(rowIndex + x));
+    }
+
+    return <div key={rowIndex} style={{ display: "flex" }}>{cellsInRow}</div>;
+  };
+  
   // Function to render the entire ship board grid
   const renderShipBoard = () => {
     const rows = [];
     for (let i = 0; i < 10; i++) {
-      const cellsInRow = [];
-      for (let x = 0; x < 10; x++) {
-        cellsInRow.push(renderCell(i * 10 + x));
+      rows.push(renderRow(i * 10));
       }
-      rows.push(
-        <div key={i} style={{ display: "flex" }}>
-          {cellsInRow}
-        </div>
-      );
-    }
     return rows;
   };
 
