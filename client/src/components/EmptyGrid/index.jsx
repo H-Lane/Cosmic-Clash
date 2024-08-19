@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Cell from "../Cell/index";
-import 'uikit/dist/css/uikit.min.css'; // Import UIkit CSS
-import 'uikit/dist/js/uikit.min.js';
-
+import "uikit/dist/css/uikit.min.css"; // Import UIkit CSS
+import "uikit/dist/js/uikit.min.js";
 
 // Functional component for rendering the player's ship board
 
-const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
+const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay }) => {
   // State to store the ship board grid
 
   const [shipBoard, setShipBoard] = useState([]);
@@ -22,7 +21,7 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
   const renderCell = (i) => {
     const status = ships[i]; // Assuming this returns 'O' or 'X'
     const style = status === "O" ? "btn-O" : status === "X" ? "btn-X" : "";
-    
+
     return (
       <Cell
         gridId={gridId}
@@ -44,44 +43,42 @@ const EmptyGrid = ({ ships, handlePlacement, gridId, onPlay}) => {
       cellsInRow.push(renderCell(rowIndex + x));
     }
 
-    return <div key={rowIndex} style={{ display: "flex" }}>{cellsInRow}</div>;
+    return <div key={rowIndex}>{cellsInRow}</div>;
   };
-  
+
   // Function to render the entire ship board grid
   const renderShipBoard = () => {
     const rows = [];
     for (let i = 0; i < 10; i++) {
       rows.push(renderRow(i * 10));
-      }
+    }
     return rows;
   };
 
-
   // Render the ship board when the component mounts
-//   useEffect(() => {
-//     if (ships && ships.length > 0) {
-//       renderShipBoard();
-//     }
-//   }, [ships]);
+  //   useEffect(() => {
+  //     if (ships && ships.length > 0) {
+  //       renderShipBoard();
+  //     }
+  //   }, [ships]);
 
   // Return the ship board grid
   return (
     <div
       className="ship-board"
       style={{
-        display: "flex",
+
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "50vh",
         width: "100vw",
         margin: "0 auto",
       }}
     >
+      {renderShipBoard()}
 
-      {renderShipBoard()} 
-
-      {onPlay && (  // CHANGE: Conditionally render the Play button if `onPlay` prop is provided
-        <button onClick={() => onPlay(gridId)}>Play</button>  // CHANGE: Render Play button with `onPlay` functionality
+      {onPlay && ( // CHANGE: Conditionally render the Play button if `onPlay` prop is provided
+        <button onClick={() => onPlay(gridId)}>Play</button> // CHANGE: Render Play button with `onPlay` functionality
       )}
     </div>
   );
