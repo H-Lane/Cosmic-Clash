@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         element: <CreateGrid />,
       },
       {
-        path: "/battle",
+        path: "/battle/:id",
         element: <Battle />,
       },
     ],
