@@ -1,8 +1,8 @@
-import React, { useState } from "react"; // Import React and useState hook
+import React, { useState, useEffect } from "react"; // Import React and useState hook
 import { Link } from "react-router-dom"; // Import Link for navigation
-import { useQuery, useMutation } from "@apollo/client"; // Import useQuery and gql from Apollo Client
+import { useQuery, useMutation, useLazyQuery } from "@apollo/client"; // Import useQuery and gql from Apollo Client
 import EmptyGrid from "../components/EmptyGrid"; // Import the EmptyGrid component
-import { GET_USER_GRIDS } from "../utils/queries";
+import { GET_USER_GRIDS, GET_GAME } from "../utils/queries";
 import { JOIN_GAME, CREATE_GAME } from "../utils/mutations";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -15,6 +15,28 @@ const Home = () => {
   console.log(data);
   const [joinGame] = useMutation(JOIN_GAME);
   const [createGame] = useMutation(CREATE_GAME);
+  const [getGame, { data: gameData }] = useLazyQuery(GET_GAME);
+
+  useEffect(() => {
+    console.log(gameData);
+    const handleGameData = () => {
+      console.log(gameData);
+      console.log(gameData.game._id);
+      if (gameData) {
+        const { playerTwo } = gameData.game;
+        const gameId = gameData.game._id;
+        if (!playerTwo) {
+          console.log("No Opponent Found");
+        } else {
+          console.log("Opponent Found!");
+          redirect(gameId);
+        }
+      }
+    };
+    setTimeout(() => {
+      handleGameData();
+    }, 1000);
+  }, [gameData]);
 
   // Function to handle play button click
   const handlePlay = async (gridId) => {
@@ -38,12 +60,11 @@ const Home = () => {
         });
         console.log("New game created:", createData.createGame);
         const gameId = createData.createGame._id;
-        
 
-        
+        let searching;
+        searchForOpp(gameId);
+        setInterval(() => searchForOpp(gameId), 3000);
 
-
-        redirect(gameId);
         // Additional logic for successfully creating a game can be added here
       }
     } catch (error) {
@@ -51,9 +72,10 @@ const Home = () => {
     }
   };
 
-  const searchForOpp = () => {
-
-  }
+  const searchForOpp = (gameId) => {
+    console.log(gameId);
+    getGame({ variables: { gameId } });
+  };
 
   const redirect = (gameId) => {
     window.location.href = `./battle/${gameId}`;
