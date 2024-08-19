@@ -3,8 +3,8 @@
   --secondary: #1a3e4c;
   --tertiary: #5a5b5c;
   --light: #fafafa;
-  --dark: #272f32;
-  --error: rgb(75, 85, 102);
+  --dark: #15ace2;
+  --error: rgb(14, 52, 117);
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(1rem);
   --border-radius: 0.5rem;

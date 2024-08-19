@@ -3,8 +3,8 @@ import EmptyGrid from "../components/EmptyGrid";
 import { useMutation } from "@apollo/client";
 import { CREATE_GRID } from "../utils/mutations";
 import DisplayShips from "../components/Ships";
-import '../../node_modules/uikit/dist/css/uikit.css'
-import '../../node_modules/uikit/dist/js/uikit.min.js'
+import "../../node_modules/uikit/dist/css/uikit.css";
+import "../../node_modules/uikit/dist/js/uikit.min.js";
 
 // This is our parent function for the page
 function CreateGrid(props) {
@@ -111,12 +111,32 @@ function CreateGrid(props) {
         textAlign: "center",
       }}
     >
+      <img
+        src="\src\assets\gal.PNG"  
+        alt="Background"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1, // Ensure it stays behind other content
+        }}
+      />
       <EmptyGrid ships={ships} handlePlacement={handlePlacement} />
       <div style={{ marginTop: "20px" }}>
-        <button onClick={handleShipSave} className="uk-button uk-button-primary">
+        <button
+          onClick={handleShipSave}
+          className="uk-button uk-button-primary"
+        >
           Save Ship Layout
         </button>
-        <button onClick={clearBoard} className="uk-button uk-button-danger" style={{ marginLeft: "10px" }}>
+        <button
+          onClick={clearBoard}
+          className="uk-button uk-button-danger"
+          style={{ marginLeft: "10px" }}
+        >
           Clear Board
         </button>
       </div>
