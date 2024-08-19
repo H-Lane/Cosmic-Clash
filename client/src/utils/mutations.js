@@ -79,6 +79,7 @@ export const CREATE_ATTACK = gql`
       hit
       shipSunk
       allShipsSunk
+      winner
     }
   }
 `;

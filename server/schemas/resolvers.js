@@ -171,6 +171,7 @@ const resolvers = {
           hit,
           shipSunk,
           allShipsSunk,
+          winner: game.winner,
         };
       }
       throw new AuthenticationError("Not logged in");
