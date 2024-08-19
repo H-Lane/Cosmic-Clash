@@ -115,74 +115,72 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    // createAttack: async (parent, { attackData }, context) => {
+    createAttack: async (parent, { gameId, position }, context) => {
 
-    //   const { gameId, gridId } = attackData; 
-
-    //   if (context.user) {
-    //     const game = await Game.findById(gameId).populate(
-    //       "playerOneGrid playerTwoGrid"
-    //     );
+      if (context.user) {
+        const game = await Game.findById(gameId).populate(
+          "playerOneGrid playerTwoGrid"
+        );
 
         
-    //     if (!game) {
-    //       throw new Error("Game not found");
-    //     }
-    //     console.log("gamefound")
+        if (!game) {
+          throw new Error("Game not found");
+        }
+        console.log("gamefound")
 
-    //     // Determine which player's turn it is - boolean that equals true for playerOne and false if its playerTwo's turn
-    //     const isPlayerOneTurn = game.turn === game.playerOne;
+        // Determine which player's turn it is - boolean that equals true for playerOne and false if its playerTwo's turn
+        const isPlayerOneTurn = game.turn === game.playerOne ? true : false;
 
-    //     // If playerOne is true, attack playerTwo grid; else, it's playerTwo's turn and attack playerOne grid
-    //     const playerGrid = isPlayerOneTurn
-    //       ? game.playerTwoGrid
-    //       : game.playerOneGrid;
+        // If playerOne is true, attack playerTwo grid; else, it's playerTwo's turn and attack playerOne grid
+        const playerGrid = isPlayerOneTurn
+          ? game.playerTwoGrid
+          : game.playerOneGrid;
 
-    //     // Stores the attacks in the correct array
-    //     const attackArray = isPlayerOneTurn
-    //       ? game.firstAttacks
-    //       : game.secondAttacks;
+        // Stores the attacks in the correct array
+        const attackArray = isPlayerOneTurn
+          ? game.firstAttacks
+          : game.secondAttacks;
 
-    //     //Check attackarray against position array for duplicate attacks
-    //     if (attackArray.includes(position)) {
-    //       throw new Error("Position already attacked");
-    //     }
+        //Check attackarray against position array for duplicate attacks
+        if (attackArray.includes(position)) {
+          throw new Error("Position already attacked");
+        }
 
-    //     // Check if the attack hits a ship
-    //     const hit = playerGrid.ships.some((ship) =>
-    //       ship.position.includes(position)
-    //     );
+        // Check if the attack hits a ship
+        const hit = playerGrid.ships.some((ship) =>
+          ship.position.includes(position)
+        );
 
-    //     // Add the attack to the array
-    //     if (hit) {
-    //       attackArray.push(position);
-    //     }
+        // Add the attack to the array
+        if (hit) {
+          attackArray.push(position);
+        }
 
-    //     // Update the turn
-    //     game.turn = isPlayerOne ? "playerTwo" : "playerOne";
+        // Update the turn
+        game.turn = isPlayerOneTurn ? game.playerTwo : game.playerOne;
 
-    //     // Save the game state after updating the attack array
-    //     await game.save();
+        // Save the game state after updating the attack array
+        await game.save();
 
-    //     // Check if a ship is sunk
-    //     const shipSunk = opponentGrid.ships.some((ship) =>
-    //       ship.position.every((pos) => opponentAttacks.includes(pos))
-    //     );
+        // Check if a ship is sunk
+        const shipSunk = playerGrid.ships.some((ship) =>
+          ship.position.every((pos) => attackArray.includes(pos))
+        );
 
-    //     // Check if all ships are sunk
-    //     const allShipsSunk = playerGrid.ships.every((ship) =>
-    //       ship.position.every((pos) => attackArray.includes(pos))
-    //     );
+        // Check if all ships are sunk
+        const allShipsSunk = playerGrid.ships.every((ship) =>
+          ship.position.every((pos) => attackArray.includes(pos))
+        );
 
-    //     return {
-    //       success: true,
-    //       hit,
-    //       shipSunk,
-    //       allShipsSunk,
-    //     };
-    //   }
-    //   throw new AuthenticationError("Not logged in");
-    // },
+        return {
+          success: true,
+          hit,
+          shipSunk,
+          allShipsSunk,
+        };
+      }
+      throw new AuthenticationError("Not logged in");
+    },
   },
 };
 
