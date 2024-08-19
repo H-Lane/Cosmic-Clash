@@ -32,3 +32,20 @@ export const GET_USER_GRIDS = gql`
   }
 }
 `;
+
+export const GET_GAME = gql`
+  query getGame($gameId: String!) {
+    game(gameId: $gameId) {
+      _id
+      playerOne
+      playerTwo
+      turn
+      firstAttacks
+      secondAttacks
+      winner
+      playerOneGrid
+      playerTwoGrid
+    }
+  }
+`; 
+
