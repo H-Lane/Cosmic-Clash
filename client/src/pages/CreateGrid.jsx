@@ -96,7 +96,7 @@ function CreateGrid(props) {
   };
 
   const redirect = () => {
-    window.location.href = `./home`;
+    window.location.href = `./`;
   };
 
   return (
@@ -112,7 +112,7 @@ function CreateGrid(props) {
       }}
     >
       <img
-        src="\src\assets\gal.PNG"  
+        src="dist\src\assets\gal.PNG"  
         alt="Background"
         style={{
           position: "absolute",
