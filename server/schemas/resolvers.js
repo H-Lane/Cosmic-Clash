@@ -20,7 +20,7 @@ const resolvers = {
 
 
     //Resolver for fetching a single game by ID
-    game: async (parent, { gameId }) => {
+    game: async (parent, { gameId }, context) => {
       return Game.findOne({ _id: new Types.ObjectId(gameId) });
     },
   },
